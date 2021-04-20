@@ -1,7 +1,9 @@
 .*
 CMakeLists.txt
 *.o
+./philo_one
 
 cmake-build-debug/
+
 
 !.gitignore
