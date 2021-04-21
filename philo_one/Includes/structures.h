@@ -13,6 +13,14 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
+typedef enum s_state_philosopher
+{
+	DIED = 0,
+	THINKING = 1,
+	SLEEPING = 2,
+	EATING = 3,
+}			e_state_philosopher;
+
 typedef struct s_parameters
 {
 	long long int	nbr_philosophers;
