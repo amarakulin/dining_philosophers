@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo_one
+NAME = philosothers_one
 CC = gcc
 P_THREAD = -pthread
 C_FILES = $(shell find . -name "*.c" $(IGNORE_PATHS) -execdir echo {} ';')
@@ -20,7 +20,9 @@ IGNORE_PATHS = ! -path "./cmake-build-debug/*"
 
 OBJDIR = ./src/obj
 INCLUDE = ./Includes
-SRC_PATHS = ./src
+SRC_PATHS = ./src \
+			./src/utils \
+			./src/parser
 
 vpath %.c $(SRC_PATHS)
 vpath %.o $(OBJDIR)
@@ -55,13 +57,11 @@ $(OBJDIR):
 clean:
 	@echo "$(TEXT_RESET)"
 	@rm -rf $(OBJDIR) ./Includes/*.h.gch
-	@cd $(LIBFT_PATH) && make clean
 	@echo "$(YELLOW)Delete 'o' files"
 
 fclean: clean
 	@echo "$(TEXT_RESET)"
 	@rm -f $(NAME)
-	@cd $(LIBFT_PATH) && make fclean
 	@echo "$(YELLOW)Delete the binary file '$(NAME)'"
 
 re: fclean all

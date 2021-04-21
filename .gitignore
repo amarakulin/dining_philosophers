@@ -1,9 +1,20 @@
-.*
-CMakeLists.txt
-*.o
-./philo_one
+### Apple files ###
+**/.DS_Store
 
+### Object files ###
+**/src/obj/*.o
+
+### Binar files ###
+**/philosothers_one
+**/philosothers_two
+**/philosothers_three
+
+
+
+### CLion files and directories ###
+CMakeLists.txt
 cmake-build-debug/
+**/.idea
 
 
 !.gitignore

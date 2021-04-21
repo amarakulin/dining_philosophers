@@ -17,4 +17,15 @@
 //General headers
 #import <stdio.h>
 
+/*
+** parser.c
+*/
+int		is_validate_parametrs(int argc, char *argv[]);
+
+/*
+** utils.c
+*/
+long long int	ft_atoi(const char *str);
+
+
 #endif

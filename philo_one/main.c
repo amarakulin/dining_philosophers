@@ -14,12 +14,11 @@
 
 int		main(int argc, char *argv[]){
 
-	printf("%d\n", argc);
-	if (argc != 5 && argc != 6)
-	{
-		printf("[-]Error : wrong number arguments\n");
-		return (1);
-	}
+//	t_parametrs *parametrs;
 
+	printf("%d\n", argc);
+	if (!is_validate_parametrs(argc, argv))
+		return (1);
+//	parametrs = get_parametrs(argv);
 	return (0);
 }
