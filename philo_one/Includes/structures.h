@@ -13,5 +13,14 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
+typedef struct s_parameters
+{
+	long long int	nbr_philosophers;
+	long long int	time_to_die;
+	long long int	time_to_eat;
+	long long int	time_to_sleep;
+	long long int	times_must_to_eat;
+}				t_parameters;
+
 #endif
 

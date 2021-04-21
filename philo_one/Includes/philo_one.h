@@ -16,16 +16,28 @@
 
 //General headers
 #import <stdio.h>
+#import <stdlib.h>
+#import <string.h>
+
+//structures.h
+#import "structures.h"
 
 /*
-** parser.c
+** validate.c
 */
-int		is_validate_parametrs(int argc, char *argv[]);
+int				is_validate_parametrs(int argc, char *argv[]);
+
+/*
+** init_parameters.c
+*/
+t_parameters	*get_parameters(int argc, char *argv[]);
 
 /*
 ** utils.c
 */
 long long int	ft_atoi(const char *str);
+void			*ft_calloc(size_t count, size_t size);
+
 
 
 #endif
