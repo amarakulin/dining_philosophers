@@ -20,6 +20,7 @@ int		main(int argc, char *argv[]){
 	if (!is_validate_parametrs(argc, argv))
 		return (1);
 	parametrs = get_parameters(argc, argv);
-	printf("%lld %lld %lld %lld %lld\n", parametrs->nbr_philosophers, parametrs->time_to_die, parametrs->time_to_eat, parametrs->time_to_sleep, parametrs->times_must_to_eat);
+
+	free(parametrs);
 	return (0);
 }
