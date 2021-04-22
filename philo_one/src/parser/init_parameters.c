@@ -24,8 +24,8 @@ t_parameters	*get_parameters(int argc, char *argv[])
 	parameters->time_to_eat = ft_atoi(copy_argv[3]);
 	parameters->time_to_sleep = ft_atoi(copy_argv[4]);
 	if (argc == 6)
-		parameters->times_must_to_eat = ft_atoi(copy_argv[5]);
+		parameters->times_must_to_eat = ft_atoi(copy_argv[5]); //at least they could eat 0 times
 	else
-		parameters->times_must_to_eat = 0;
+		parameters->times_must_to_eat = -1;
 	return (parameters);
 }
