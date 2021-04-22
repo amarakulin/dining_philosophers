@@ -15,15 +15,19 @@
 
 typedef enum e_state_philosopher
 {
-	DIED = 0,
-	THINKING = 1,
-	SLEEPING = 2,
-	EATING = 3,
+	START_SIMULATION = 0,
+	DIED = 1,
+	THINKING = 2,
+	SLEEPING = 3,
+	EATING = 4,
 }			t_state_philosopher;
 
 typedef struct s_philosopher
 {
 	t_state_philosopher		state;
+	long long int			last_meal;
+	pthread_t				thread_id;
+	int 					numberOfPhilo;
 }				t_philosopher;
 
 typedef struct s_parameters
