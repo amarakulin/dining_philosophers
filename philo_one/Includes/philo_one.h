@@ -19,6 +19,7 @@
 #import <stdlib.h>
 #import <string.h>
 #include <pthread.h>
+#include <sys/time.h>
 
 //structures.h
 #import "structures.h"
@@ -27,7 +28,6 @@ t_philosopher	*init_philosophers(t_parameters *param);
 int				is_philosopher_death(t_philosopher *philo);
 void			*philo_lifecycle(void *arg);
 void			create_philo_threads(t_philosopher *arr_philo, t_parameters *param);
-
 
 /*
 ** validate.c

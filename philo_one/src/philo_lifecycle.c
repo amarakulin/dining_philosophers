@@ -14,7 +14,7 @@
 
 t_philosopher	*init_philosophers(t_parameters *param)
 {
-	size_t				i;
+	int 			i;
 	t_philosopher	*arr_philosophers;
 
 	i = 0;
@@ -23,7 +23,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	{
 		arr_philosophers[i].state = START_SIMULATION;
 		arr_philosophers[i].last_meal = 0;
-		arr_philosophers[i].numberOfPhilo = (int)i;
+		arr_philosophers[i].numberOfPhilo = i;
 		i++;
 	}
 	return (arr_philosophers);
@@ -38,24 +38,34 @@ int				is_philosopher_death(t_philosopher *philo)
 
 void			*philo_lifecycle(void *arg)
 {
-	t_philosopher *philo;
+	t_philosopher	*philo;
+	struct timeval	curr_time;
 
 	philo = arg;
-	printf("I am a philo - %d\n", philo->numberOfPhilo);
+	while (1)
+	{
+		gettimeofday(&curr_time, NULL);
+		printf("time_stand_ms - %ld\n", curr_time.tv_sec * 1000 + curr_time.tv_usec / 1000);
+		printf("I am a philo - %d\n", philo->numberOfPhilo);
+	}
 	return (NULL);
 }
 
 void			create_philo_threads(t_philosopher *arr_philo, t_parameters *param)
 {
-	size_t	i;
-	t_philosopher philo;
+	int				i;
+	int				j;
 
 	i = 0;
 	while (i != param->nbr_philosophers)
 	{
-		philo = arr_philo[i];
-		pthread_create(&philo.thread_id, NULL, philo_lifecycle, &philo);
-		pthread_join(philo.thread_id, NULL);
+		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)&arr_philo[i]);
 		i++;
+	}
+	j = 0;
+	while (j != param->nbr_philosophers)
+	{
+		pthread_join(arr_philo[j].thread_id, NULL);
+		j++;
 	}
 }
