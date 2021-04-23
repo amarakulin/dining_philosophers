@@ -12,7 +12,6 @@
 
 #include "philo_one.h"
 
-
 int				is_philosopher_death(t_philosopher *arr_philo, t_parameters param)
 {
 	int		i;

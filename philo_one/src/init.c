@@ -16,14 +16,19 @@ t_philosopher	*init_philosophers(t_parameters *param)
 {
 	int 			i;
 	t_philosopher	*arr_philosophers;
+	struct timeval	time;
+	long int		curr_time;
 
 	i = 0;
 	arr_philosophers = ft_calloc(param->nbr_philosophers, sizeof(t_philosopher));
 	while(i != param->nbr_philosophers)
 	{
+		gettimeofday(&time, NULL);
+		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		arr_philosophers[i].state = START_SIMULATION;
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].numberOfPhilo = i;
+		arr_philosophers[i].last_meal = curr_time;
 		i++;
 	}
 	return (arr_philosophers);
