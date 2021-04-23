@@ -29,23 +29,34 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	return (arr_philosophers);
 }
 
-int				is_philosopher_death(t_philosopher *philo)
+int				is_philosopher_death(t_philosopher *arr_philo, t_parameters param)
 {
-	if (philo->state == DIED)
-		return (0);
-	return (1);
+	int		i;
+
+	i = 0;
+	while (param.nbr_philosophers != i)
+	{
+		if (arr_philo[i].state == DIED)
+			return (1);
+	}
+	return (0);
 }
 
 void			*philo_lifecycle(void *arg)
 {
 	t_philosopher	*philo;
-	struct timeval	curr_time;
+	struct timeval	time;
+	long int		curr_time;
+	long int		start_time;
 
+	gettimeofday(&time, NULL);
+	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 	philo = arg;
 	while (1)
 	{
-		gettimeofday(&curr_time, NULL);
-		printf("time_stand_ms - %ld\n", curr_time.tv_sec * 1000 + curr_time.tv_usec / 1000);
+		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+		gettimeofday(&time, NULL);
+		printf("time_stand_ms - %ld\n", curr_time - start_time);
 		printf("I am a philo - %d\n", philo->numberOfPhilo);
 	}
 	return (NULL);
