@@ -22,28 +22,23 @@ typedef enum e_state_philosopher
 	EATING = 4,
 }			t_state_philosopher;
 
+typedef struct s_parameters
+{
+	long int	nbr_philosophers;
+	long int	time_to_die;
+	long int	time_to_eat;
+	long int	time_to_sleep;
+	long int	times_must_to_eat;
+}				t_parameters;
+
 typedef struct s_philosopher
 {
 	t_state_philosopher		state;
-	long long int			last_meal;
+	long int				last_meal;
 	pthread_t				thread_id;
 	int 					numberOfPhilo;
+	t_parameters			*param;
 }				t_philosopher;
-
-typedef struct s_parameters
-{
-	long long int	nbr_philosophers;
-	long long int	time_to_die;
-	long long int	time_to_eat;
-	long long int	time_to_sleep;
-	long long int	times_must_to_eat;
-}				t_parameters;
-
-typedef struct s_data
-{
-	t_philosopher	*arr_philo;
-	t_parameters	*param;
-}					t_data;
 
 #endif
 

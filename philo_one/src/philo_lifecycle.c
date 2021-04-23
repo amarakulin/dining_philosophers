@@ -41,20 +41,21 @@ void			*philo_lifecycle(void *arg)
 		gettimeofday(&time, NULL);
 		printf("time_stand_ms - %ld\n", curr_time - start_time);
 		printf("I am a philo - %d\n", philo->numberOfPhilo);
+		if (curr_time - philo->last_meal >= philo->param->time_to_die)
+		{
+			philo->state = DIED;
+			break;
+		}
 	}
 	return (NULL);
 }
 
-void			create_philo_threads(t_data *data)
+void create_philo_threads(t_parameters *param, t_philosopher *arr_philo)
 {
 	int				i;
 	int				j;
-	t_parameters	*param;
-	t_philosopher	*arr_philo;
 
 	i = 0;
-	param = data->param;
-	arr_philo = data->arr_philo;
 	while (i != param->nbr_philosophers)
 	{
 		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)&arr_philo[i]);

@@ -29,6 +29,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].numberOfPhilo = i;
 		arr_philosophers[i].last_meal = curr_time;
+		arr_philosophers[i].param = param;
 		i++;
 	}
 	return (arr_philosophers);
