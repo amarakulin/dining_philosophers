@@ -39,5 +39,11 @@ typedef struct s_parameters
 	long long int	times_must_to_eat;
 }				t_parameters;
 
+typedef struct s_data
+{
+	t_philosopher	*arr_philo;
+	t_parameters	*param;
+}					t_data;
+
 #endif
 

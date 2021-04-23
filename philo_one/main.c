@@ -14,18 +14,17 @@
 
 int		main(int argc, char *argv[]){
 
-	t_parameters *param;
-	t_philosopher *arr_philo;
+	t_data			*data;
 
-	printf("%d\n", argc);
+	data = ft_calloc(1, sizeof(t_data));
 	if (!is_validate_parametrs(argc, argv))
 		return (1);
-	param = get_parameters(argc, argv);
-	arr_philo = init_philosophers(param);
+	data->param = get_parameters(argc, argv);
+	data->arr_philo = init_philosophers(data->param);
 	printf("Before Threads\n");
-	create_philo_threads(arr_philo, param);
+	create_philo_threads(data);
 	printf("After Threads\n");
-	free(param);
-	free(arr_philo);
+	free(data->param);
+	free(data->arr_philo);
 	return (0);
 }

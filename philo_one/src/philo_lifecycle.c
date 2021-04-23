@@ -62,12 +62,16 @@ void			*philo_lifecycle(void *arg)
 	return (NULL);
 }
 
-void			create_philo_threads(t_philosopher *arr_philo, t_parameters *param)
+void			create_philo_threads(t_data *data)
 {
 	int				i;
 	int				j;
+	t_parameters	*param;
+	t_philosopher	*arr_philo;
 
 	i = 0;
+	param = data->param;
+	arr_philo = data->arr_philo;
 	while (i != param->nbr_philosophers)
 	{
 		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)&arr_philo[i]);
