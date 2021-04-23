@@ -1,16 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_parameters.c                                  :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tilda <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/21 14:27:27 by tilda             #+#    #+#             */
-/*   Updated: 2021/04/21 14:27:29 by tilda            ###   ########.fr       */
+/*   Created: 2021/04/23 22:06:58 by tilda             #+#    #+#             */
+/*   Updated: 2021/04/23 22:07:00 by tilda            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_one.h"
+
+t_philosopher	*init_philosophers(t_parameters *param)
+{
+	int 			i;
+	t_philosopher	*arr_philosophers;
+
+	i = 0;
+	arr_philosophers = ft_calloc(param->nbr_philosophers, sizeof(t_philosopher));
+	while(i != param->nbr_philosophers)
+	{
+		arr_philosophers[i].state = START_SIMULATION;
+		arr_philosophers[i].last_meal = 0;
+		arr_philosophers[i].numberOfPhilo = i;
+		i++;
+	}
+	return (arr_philosophers);
+}
+
 
 t_parameters	*get_parameters(int argc, char *argv[])
 {

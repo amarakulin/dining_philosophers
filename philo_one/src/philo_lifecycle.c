@@ -12,22 +12,6 @@
 
 #include "philo_one.h"
 
-t_philosopher	*init_philosophers(t_parameters *param)
-{
-	int 			i;
-	t_philosopher	*arr_philosophers;
-
-	i = 0;
-	arr_philosophers = ft_calloc(param->nbr_philosophers, sizeof(t_philosopher));
-	while(i != param->nbr_philosophers)
-	{
-		arr_philosophers[i].state = START_SIMULATION;
-		arr_philosophers[i].last_meal = 0;
-		arr_philosophers[i].numberOfPhilo = i;
-		i++;
-	}
-	return (arr_philosophers);
-}
 
 int				is_philosopher_death(t_philosopher *arr_philo, t_parameters param)
 {
