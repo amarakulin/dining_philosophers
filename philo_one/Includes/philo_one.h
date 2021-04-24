@@ -24,9 +24,9 @@
 //structures.h
 #import "structures.h"
 
-int				is_philosopher_death(t_philosopher *arr_philo, t_parameters param);
+void			*is_philosopher_death(void *arg);
 void			*philo_lifecycle(void *arg);
-void create_philo_threads(t_parameters *param, t_philosopher *arr_philo);
+void			create_philo_threads(t_parameters *param, t_philosopher *arr_philo);
 
 /*
 ** validate.c
