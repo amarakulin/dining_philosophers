@@ -22,7 +22,7 @@ int		main(int argc, char *argv[]){
 	param = get_parameters(argc, argv);
 	arr_philo = init_philosophers(param);
 	printf("Before Threads\n");
-	create_philo_threads(param, arr_philo);
+	create_threads(param, arr_philo);
 	printf("After Threads\n");
 	free(param);
 	free(arr_philo);
