@@ -16,13 +16,18 @@ void			*is_philosopher_death(void *arg)
 {
 	int		i;
 	t_philosopher	*arr_philo;
+	struct timeval	time;
+	long int		curr_time;
 
 	arr_philo = arg;
 	i = 0;
 	while (arr_philo->param->nbr_philosophers != i)
 	{
-		if (arr_philo[i].state == DIED)
+		gettimeofday(&time, NULL);
+		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+		if (curr_time - arr_philo[i].last_meal >= arr_philo->param->time_to_die)
 		{
+			arr_philo[i].state = DIED;
 			break;
 		}
 	}
@@ -42,37 +47,26 @@ void			*philo_lifecycle(void *arg)
 	philo = arg;
 	while (1)
 	{
-		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		gettimeofday(&time, NULL);
+		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		printf("time_stand_ms - %ld\n", curr_time - start_time);
 		printf("I am a philo - %d\n", philo->numberOfPhilo);
-		if (curr_time - philo->last_meal >= philo->param->time_to_die)
-		{
-			philo->state = DIED;
-//			break;
-		}
 	}
 	return (NULL);
 }
 
-void create_philo_threads(t_parameters *param, t_philosopher *arr_philo)
+void			create_philo_threads(t_parameters *param, t_philosopher *arr_philo)
 {
 	int				i;
-	int				j;
 	pthread_t		thread_death;
 
 	i = 0;
+	//TODO Create thread to print out in the terminal info
 	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)arr_philo);
 	while (i != param->nbr_philosophers)
 	{
 		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)&arr_philo[i]);
 		i++;
 	}
-	j = 0;
 	pthread_join(thread_death, NULL);
-	while (j != param->nbr_philosophers)
-	{
-//		pthread_join(arr_philo[j].thread_id, NULL);
-		j++;
-	}
 }
