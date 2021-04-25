@@ -37,7 +37,7 @@ typedef struct s_philosopher
 	t_state_philosopher		state;
 	long int				last_meal;
 	pthread_t				thread_id;
-	int						numberOfPhilo;
+	int						number_of_philo;
 	t_parameters			*param;
 }				t_philosopher;
 

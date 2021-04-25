@@ -15,6 +15,7 @@
 #define _PHILO_ONE_H
 
 //General headers
+#import <unistd.h>
 #import <stdio.h>
 #import <stdlib.h>
 #import <string.h>
@@ -24,11 +25,21 @@
 //structures.h
 #import "structures.h"
 
+
+
+
+/*
+** philo_lifecycle.c
+*/
 void			*is_philosopher_death(void *arg);
 void			*philo_lifecycle(void *arg);
 void			create_threads(t_parameters *param, t_philosopher *arr_philo);
-void			wait_philo_sit_to_table(t_philosopher *philo);
 
+/*
+** philo_lifecycle.c
+*/
+void			wait_philo_sit_to_table(t_philosopher *philo);
+int				my_usleep(useconds_t usec);
 
 /*
 ** validate.c

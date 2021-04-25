@@ -18,18 +18,29 @@ void			*is_philosopher_death(void *arg)
 	t_philosopher *arr_philo;
 	struct timeval time;
 	long int curr_time;
+	long int		start_time;
 
 	arr_philo = arg;
-	i = 0;
-	while (arr_philo->param->nbr_philosophers != i)
+	gettimeofday(&time, NULL);
+	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	while (1)
 	{
-		gettimeofday(&time, NULL);
-		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-		if (curr_time - arr_philo[i].last_meal >= arr_philo->param->time_to_die)
+		i = 0;
+		while (arr_philo->param->nbr_philosophers != i)
 		{
-			arr_philo[i].state = DIED;
-			break;
+			gettimeofday(&time, NULL);
+			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+			printf("I am a philo - %d | time_stand_ms - %ld\n", arr_philo[i].number_of_philo, curr_time - start_time);
+			if (curr_time - arr_philo[i].last_meal >= arr_philo->param->time_to_die)
+			{
+				arr_philo[i].state = DIED;
+				printf("Philo - %d DIED\n", arr_philo[i].number_of_philo);
+				break;
+			}
+			i++;
 		}
+		if (arr_philo[i].state == DIED)
+			break;
 	}
 	return (NULL);
 }
@@ -49,8 +60,6 @@ void			*philo_lifecycle(void *arg)
 	{
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-		printf("time_stand_ms - %ld\n", curr_time - start_time);
-		printf("I am a philo - %d\n", philo->numberOfPhilo);
 	}
 	return (NULL);
 }
