@@ -19,7 +19,7 @@ void	wait_philo_sit_to_table(t_philosopher *philo)
 	int		index_philo;
 
 	philo->state = SIT_TO_TABLE;
-	index_philo = philo->numberOfPhilo;
+	index_philo = philo->number_of_philo;
 	while(1)
 	{
 		if (philo->state == SIT_TO_TABLE)
@@ -35,4 +35,23 @@ void	wait_philo_sit_to_table(t_philosopher *philo)
 		if (count == philo->param->nbr_philosophers)
 			break ;
 	}
+}
+
+int		my_usleep(useconds_t usec)
+{
+	struct timeval	time;
+	long int		curr_time;
+	long int		start_time;
+
+	gettimeofday(&time, NULL);
+	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	while(curr_time - start_time < usec)
+	{
+		gettimeofday(&time, NULL);
+		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+		if (usleep(1) == -1)
+			return (-1);
+	}
+	return (0);
 }
