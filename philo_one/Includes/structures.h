@@ -15,7 +15,7 @@
 
 typedef enum e_state_philosopher
 {
-	START_SIMULATION = 0,
+	SIT_TO_TABLE = 0,
 	DIED = 1,
 	THINKING = 2,
 	SLEEPING = 3,
@@ -29,6 +29,7 @@ typedef struct s_parameters
 	long int	time_to_eat;
 	long int	time_to_sleep;
 	long int	times_must_to_eat;
+	char		*wait_all_philo;
 }				t_parameters;
 
 typedef struct s_philosopher

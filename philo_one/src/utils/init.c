@@ -25,7 +25,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	{
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-		arr_philosophers[i].state = START_SIMULATION;
+//		arr_philosophers[i].state = START_SIMULATION;
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].numberOfPhilo = i;
 		arr_philosophers[i].last_meal = curr_time;
@@ -38,7 +38,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 
 t_parameters	*get_parameters(int argc, char *argv[])
 {
-	char **copy_argv;
+	char	**copy_argv;
 	t_parameters *parameters;
 
 	parameters = ft_calloc(sizeof(t_parameters),1);
@@ -51,5 +51,7 @@ t_parameters	*get_parameters(int argc, char *argv[])
 		parameters->times_must_to_eat = ft_atoi(copy_argv[5]); //at least they could eat 0 times
 	else
 		parameters->times_must_to_eat = -1;
+	parameters->wait_all_philo = ft_calloc(sizeof(char), parameters->nbr_philosophers + 1);
+	memset(parameters->wait_all_philo, '0', sizeof(char) * parameters->nbr_philosophers);
 	return (parameters);
 }

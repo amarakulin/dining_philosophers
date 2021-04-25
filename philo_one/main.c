@@ -24,6 +24,7 @@ int		main(int argc, char *argv[]){
 	printf("Before Threads\n");
 	create_threads(param, arr_philo);
 	printf("After Threads\n");
+	free(param->wait_all_philo);
 	free(param);
 	free(arr_philo);
 	return (0);

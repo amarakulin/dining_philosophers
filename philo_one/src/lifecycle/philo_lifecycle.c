@@ -14,10 +14,10 @@
 
 void			*is_philosopher_death(void *arg)
 {
-	int		i;
-	t_philosopher	*arr_philo;
-	struct timeval	time;
-	long int		curr_time;
+	int i;
+	t_philosopher *arr_philo;
+	struct timeval time;
+	long int curr_time;
 
 	arr_philo = arg;
 	i = 0;
@@ -41,10 +41,10 @@ void			*philo_lifecycle(void *arg)
 	long int		curr_time;
 	long int		start_time;
 
-	//TODO wait all philo | use arr
+	philo = arg;
+	wait_philo_sit_to_table(philo);
 	gettimeofday(&time, NULL);
 	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	philo = arg;
 	while (1)
 	{
 		gettimeofday(&time, NULL);

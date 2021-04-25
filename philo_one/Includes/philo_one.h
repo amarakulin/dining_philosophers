@@ -27,6 +27,8 @@
 void			*is_philosopher_death(void *arg);
 void			*philo_lifecycle(void *arg);
 void			create_threads(t_parameters *param, t_philosopher *arr_philo);
+void			wait_philo_sit_to_table(t_philosopher *philo);
+
 
 /*
 ** validate.c

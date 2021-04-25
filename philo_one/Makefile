@@ -21,6 +21,7 @@ IGNORE_PATHS = ! -path "./cmake-build-debug/*"
 OBJDIR = ./src/obj
 INCLUDE = ./Includes
 SRC_PATHS = ./src \
+			./src/lifecycle \
 			./src/utils \
 			./src/parser
 
