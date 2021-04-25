@@ -25,9 +25,8 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	{
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-//		arr_philosophers[i].state = START_SIMULATION;
 		arr_philosophers[i].last_meal = 0;
-		arr_philosophers[i].numberOfPhilo = i;
+		arr_philosophers[i].number_of_philo = i;
 		arr_philosophers[i].last_meal = curr_time;
 		arr_philosophers[i].param = param;
 		i++;
