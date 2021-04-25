@@ -25,10 +25,16 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	{
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].number_of_philo = i;
 		arr_philosophers[i].last_meal = curr_time;
 		arr_philosophers[i].param = param;
+		arr_philosophers[i].is_right_fork = 0;
+		arr_philosophers[i].is_left_fork = 0;
+		if (i % 2 == 0)
+		{
+			arr_philosophers[i].is_right_fork = 1;
+			param->fork_arr[i] = arr_philosophers[i].is_right_fork;
+		}
 		i++;
 	}
 	return (arr_philosophers);
@@ -52,5 +58,7 @@ t_parameters	*get_parameters(int argc, char *argv[])
 		parameters->times_must_to_eat = -1;
 	parameters->wait_all_philo = ft_calloc(sizeof(char), parameters->nbr_philosophers + 1);
 	memset(parameters->wait_all_philo, '0', sizeof(char) * parameters->nbr_philosophers);
+	parameters->fork_arr = ft_calloc(sizeof(int), parameters->nbr_philosophers);
+	memset(parameters->fork_arr, 0, sizeof(int) * parameters->nbr_philosophers);
 	return (parameters);
 }

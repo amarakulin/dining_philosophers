@@ -21,7 +21,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (memory);
 }
 
-
+//TODO Create a function to conver from time to misileconds
 long long int	ft_atoi(const char *str)
 {
 	long long int	res;

@@ -21,6 +21,12 @@ void			*is_philosopher_death(void *arg)
 	long int		start_time;
 
 	arr_philo = arg;
+	i = 0;
+	while (arr_philo->param->nbr_philosophers != i)
+	{
+		wait_philo_sit_to_table(&arr_philo[i]);
+		i++;
+	}
 	gettimeofday(&time, NULL);
 	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 	while (1)
@@ -49,17 +55,34 @@ void			*philo_lifecycle(void *arg)
 {
 	t_philosopher	*philo;
 	struct timeval	time;
-	long int		curr_time;
-	long int		start_time;
+	pthread_mutex_t lock;
 
 	philo = arg;
 	wait_philo_sit_to_table(philo);
-	gettimeofday(&time, NULL);
-	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	pthread_mutex_init(&lock, NULL);//TODO protect
+	gettimeofday(&time, NULL); // TODO protect may be
+	philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
 	while (1)
 	{
-		gettimeofday(&time, NULL);
-		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+		if ((philo->state == SIT_TO_TABLE || philo->state == THOUGHT))
+		{
+			pthread_mutex_lock(&lock);
+			get_fork(philo);
+			gettimeofday(&time, NULL);
+			philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
+			my_usleep(philo->param->time_to_eat);
+			put_fork(philo);
+			philo->state = ATE;
+			pthread_mutex_unlock(&lock);
+		}
+		else if (philo->state == ATE)
+		{
+			my_usleep(philo->param->time_to_sleep);
+			philo->state = SLEPT;
+		}
+		else if (philo->state == SLEPT)
+			philo->state = THOUGHT;
+		break;
 	}
 	return (NULL);
 }
