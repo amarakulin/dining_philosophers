@@ -22,6 +22,8 @@ void			*is_philosopher_death(void *arg)
 	int i;
 	t_philosopher *arr_philo;
 	int main_condition;
+	long int cur_time;
+	long int last_meal;
 
 	arr_philo = arg;
 	i = 0;
@@ -35,14 +37,16 @@ void			*is_philosopher_death(void *arg)
 		i = 0;
 		while (arr_philo->param->nbr_philosophers != i)
 		{
-			main_condition = get_current_time() - arr_philo[i].last_meal >= arr_philo->param->time_to_die && arr_philo[i].last_meal != 0;
+			cur_time = get_current_time();
+			last_meal = arr_philo[i].last_meal;
+			main_condition = cur_time - last_meal >= arr_philo->param->time_to_die && last_meal != 0;
 			if (main_condition)
 			{
 				arr_philo[i].state = DIED;
-				printf("Philo - %d DIED\n", arr_philo[i].index_philo);
+				printf("Philo - %d DIED | i - %d\n", arr_philo[i].index_philo, i);
 				//sometimes here just die philo if total number of philo is 4 or pair (wierd)
-				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" , get_current_time(), arr_philo[i].last_meal, arr_philo->param->time_to_die);
-				printf("result of condition - %d\n", get_current_time() - arr_philo[i].last_meal >= arr_philo->param->time_to_die && arr_philo[i].last_meal != 0);
+				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" , cur_time, last_meal, arr_philo->param->time_to_die);
+				printf("result of condition - %d\n", main_condition);
 				return (NULL);
 			}
 			i++;
