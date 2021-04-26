@@ -16,10 +16,7 @@
 typedef enum e_state_philosopher
 {
 	START_SIMULATION = 0,
-	DIED = 1,
-	THOUGHT = 2,
-	SLEPT = 3,
-	ATE = 4,
+	READY = 1,
 }			t_state_philosopher;
 
 typedef struct s_parameters

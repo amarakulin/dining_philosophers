@@ -42,7 +42,6 @@ void			*is_philosopher_death(void *arg)
 			main_condition = cur_time - last_meal >= arr_philo->param->time_to_die && last_meal != 0;
 			if (main_condition)
 			{
-				arr_philo[i].state = DIED;
 				printf("Philo - %d DIED | i - %d\n", arr_philo[i].index_philo, i);
 				//sometimes here just die philo if total number of philo is 4 or pair (wierd)
 				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" , cur_time, last_meal, arr_philo->param->time_to_die);
