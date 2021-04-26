@@ -19,19 +19,19 @@ int			left(int position_philo, int total_philosophers)
 
 int			get_fork(t_philosopher* philo)
 {
-	if (philo->number_of_philo % 2 == 0)
+	if (philo->index_philo % 2 == 0)
 	{
 		pthread_mutex_lock(philo->is_right_fork);
-		printf("Philo take right - %d\n", philo->number_of_philo);
+		printf("Philo take right - %d\n", philo->index_philo);
 		pthread_mutex_lock(philo->is_left_fork);
-		printf("Philo take left - %d\n", philo->number_of_philo);
+		printf("Philo take left - %d\n", philo->index_philo);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->is_left_fork);
-		printf("Philo take left - %d\n", philo->number_of_philo);
+		printf("Philo take left - %d\n", philo->index_philo);
 		pthread_mutex_lock(philo->is_right_fork);
-		printf("Philo take right - %d\n", philo->number_of_philo);
+		printf("Philo take right - %d\n", philo->index_philo);
 	}
 	return (0);
 }
@@ -39,7 +39,7 @@ int			get_fork(t_philosopher* philo)
 void		put_fork(t_philosopher* philo)
 {
 	pthread_mutex_unlock(philo->is_right_fork);
-	printf("Philo put right - %d\n", philo->number_of_philo);
+	printf("Philo put right - %d\n", philo->index_philo);
 	pthread_mutex_unlock(philo->is_left_fork);
-	printf("Philo put left - %d\n", philo->number_of_philo);
+	printf("Philo put left - %d\n", philo->index_philo);
 }

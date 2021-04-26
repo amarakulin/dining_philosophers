@@ -14,7 +14,7 @@
 
 void		print_message(t_philosopher *philo, char *message)
 {
-	printf("I am a philo - %d | %s - %ld\n", philo->number_of_philo, message, get_current_time() - philo->start_time);
+	printf("I am a philo - %d | %s - %ld\n", philo->index_philo, message, get_current_time() - philo->start_time);
 }
 
 void			*is_philosopher_death(void *arg)
@@ -37,7 +37,7 @@ void			*is_philosopher_death(void *arg)
 			if (get_current_time() - arr_philo[i].last_meal >= arr_philo->param->time_to_die && arr_philo[i].last_meal != 0)
 			{
 				arr_philo[i].state = DIED;
-				printf("Philo - %d DIED\n", arr_philo[i].number_of_philo);
+				printf("Philo - %d DIED\n", arr_philo[i].index_philo);
 				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" ,
 					   get_current_time(), arr_philo[i].last_meal, arr_philo->param->time_to_die);
 				return (NULL);

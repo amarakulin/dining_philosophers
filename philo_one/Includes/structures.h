@@ -35,7 +35,7 @@ typedef struct s_parameters
 
 typedef struct s_philosopher
 {
-	int						number_of_philo;
+	int						index_philo;
 	pthread_mutex_t			*is_right_fork;
 	pthread_mutex_t			*is_left_fork;
 	long int				last_meal;

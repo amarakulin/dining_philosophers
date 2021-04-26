@@ -19,7 +19,7 @@ void	wait_philo_sit_to_table(t_philosopher *philo)
 	int		index_philo;
 
 	philo->state = THOUGHT;
-	index_philo = philo->number_of_philo;
+	index_philo = philo->index_philo;
 	while(1)
 	{
 		if (philo->state == THOUGHT)

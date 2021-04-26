@@ -21,7 +21,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	arr_philosophers = ft_calloc(param->nbr_philosophers, sizeof(t_philosopher));
 	while(i != param->nbr_philosophers)
 	{
-		arr_philosophers[i].number_of_philo = i;
+		arr_philosophers[i].index_philo = i;
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].param = param;
 		arr_philosophers[i].is_right_fork = &arr_philosophers->param->fork_arr[i];
