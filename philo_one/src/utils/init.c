@@ -26,7 +26,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		arr_philosophers[i].number_of_philo = i;
-		arr_philosophers[i].last_meal = curr_time;
+		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].param = param;
 		arr_philosophers[i].is_right_fork = &arr_philosophers->param->fork_arr[i];
 		arr_philosophers[i].is_left_fork = &arr_philosophers->param->fork_arr[left(
