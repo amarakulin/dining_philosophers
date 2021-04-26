@@ -12,6 +12,19 @@
 
 #include "philo_one.h"
 
+void		print_forks(int *fork_arr, int len)
+{
+	int i;
+
+	i = 0;
+	while(fork_arr[i])
+	{
+		printf("%c - ", fork_arr[i]);
+		i++;
+	}
+	printf("\n");
+}
+
 void			*is_philosopher_death(void *arg)
 {
 	int i;
@@ -36,7 +49,7 @@ void			*is_philosopher_death(void *arg)
 		{
 			gettimeofday(&time, NULL);
 			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-			printf("I am a philo - %d | time_stand_ms - %ld\n", arr_philo[i].number_of_philo, curr_time - start_time);
+//			printf("I am a philo - %d | time_stand_ms - %ld\n", arr_philo[i].number_of_philo, curr_time - start_time);
 			if (curr_time - arr_philo[i].last_meal >= arr_philo->param->time_to_die)
 			{
 				arr_philo[i].state = DIED;
@@ -55,33 +68,41 @@ void			*philo_lifecycle(void *arg)
 {
 	t_philosopher	*philo;
 	struct timeval	time;
-	pthread_mutex_t lock;
+	long int		curr_time;
 
 	philo = arg;
 	wait_philo_sit_to_table(philo);
-	pthread_mutex_init(&lock, NULL);//TODO protect
 	gettimeofday(&time, NULL); // TODO protect may be
 	philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
+	philo->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 	while (1)
 	{
-		if ((philo->state == SIT_TO_TABLE || philo->state == THOUGHT))
+		if (philo->state == THOUGHT)
 		{
-			pthread_mutex_lock(&lock);
 			get_fork(philo);
 			gettimeofday(&time, NULL);
 			philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
+			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+			printf("I am a philo - %d | EATING - %ld\n", philo->number_of_philo, curr_time - philo->start_time);
 			my_usleep(philo->param->time_to_eat);
 			put_fork(philo);
 			philo->state = ATE;
-			pthread_mutex_unlock(&lock);
 		}
 		else if (philo->state == ATE)
 		{
+			gettimeofday(&time, NULL);
+			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+			printf("I am a philo - %d | SLEEPING - %ld\n", philo->number_of_philo, curr_time - philo->start_time);
 			my_usleep(philo->param->time_to_sleep);
 			philo->state = SLEPT;
 		}
 		else if (philo->state == SLEPT)
+		{
+			gettimeofday(&time, NULL);
+			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+			printf("I am a philo - %d | THINKING - %ld\n", philo->number_of_philo, curr_time - philo->start_time);
 			philo->state = THOUGHT;
+		}
 		break;
 	}
 	return (NULL);

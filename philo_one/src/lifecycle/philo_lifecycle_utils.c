@@ -18,11 +18,11 @@ void	wait_philo_sit_to_table(t_philosopher *philo)
 	int		count;
 	int		index_philo;
 
-	philo->state = SIT_TO_TABLE;
+	philo->state = THOUGHT;
 	index_philo = philo->number_of_philo;
 	while(1)
 	{
-		if (philo->state == SIT_TO_TABLE)
+		if (philo->state == THOUGHT)
 			philo->param->wait_all_philo[index_philo] = '1';
 		count = 0;
 		i = 0;
@@ -50,7 +50,7 @@ int		my_usleep(useconds_t usec)
 	{
 		gettimeofday(&time, NULL);
 		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-		if (usleep(1) == -1)
+		if (usleep(10) == -1)
 			return (-1);
 	}
 	return (0);

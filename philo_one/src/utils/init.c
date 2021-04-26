@@ -28,26 +28,24 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		arr_philosophers[i].number_of_philo = i;
 		arr_philosophers[i].last_meal = curr_time;
 		arr_philosophers[i].param = param;
-		arr_philosophers[i].is_right_fork = 0;
-		arr_philosophers[i].is_left_fork = 0;
-		if (i % 2 == 0)
-		{
-			arr_philosophers[i].is_right_fork = 1;
-			param->fork_arr[i] = arr_philosophers[i].is_right_fork;
-		}
+		arr_philosophers[i].is_right_fork = &arr_philosophers->param->fork_arr[i];
+		arr_philosophers[i].is_left_fork = &arr_philosophers->param->fork_arr[left(
+				i, param->nbr_philosophers)];
+		arr_philosophers[i].state = START_SIMULATION;
 		i++;
 	}
 	return (arr_philosophers);
 }
 
-
 t_parameters	*get_parameters(int argc, char *argv[])
 {
+	int		i;
 	char	**copy_argv;
 	t_parameters *parameters;
 
-	parameters = ft_calloc(sizeof(t_parameters),1);
+	i = 0;
 	copy_argv = argv;
+	parameters = ft_calloc(sizeof(t_parameters),1);
 	parameters->nbr_philosophers = ft_atoi(copy_argv[1]);
 	parameters->time_to_die = ft_atoi(copy_argv[2]);
 	parameters->time_to_eat = ft_atoi(copy_argv[3]);
@@ -58,7 +56,13 @@ t_parameters	*get_parameters(int argc, char *argv[])
 		parameters->times_must_to_eat = -1;
 	parameters->wait_all_philo = ft_calloc(sizeof(char), parameters->nbr_philosophers + 1);
 	memset(parameters->wait_all_philo, '0', sizeof(char) * parameters->nbr_philosophers);
-	parameters->fork_arr = ft_calloc(sizeof(int), parameters->nbr_philosophers);
-	memset(parameters->fork_arr, 0, sizeof(int) * parameters->nbr_philosophers);
+	parameters->fork_arr = ft_calloc(sizeof(pthread_mutex_t), parameters->nbr_philosophers);
+	while (i != parameters->nbr_philosophers)
+	{
+		pthread_mutex_init(&parameters->fork_arr[i], NULL);
+		i++;
+	}
+
+
 	return (parameters);
 }

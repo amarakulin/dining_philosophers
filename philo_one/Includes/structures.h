@@ -15,7 +15,7 @@
 
 typedef enum e_state_philosopher
 {
-	SIT_TO_TABLE = 0,
+	START_SIMULATION = 0,
 	DIED = 1,
 	THOUGHT = 2,
 	SLEPT = 3,
@@ -24,21 +24,22 @@ typedef enum e_state_philosopher
 
 typedef struct s_parameters
 {
-	long int	nbr_philosophers;
-	long int	time_to_die;
-	long int	time_to_eat;
-	long int	time_to_sleep;
-	long int	times_must_to_eat;
-	char		*wait_all_philo;
-	int			*fork_arr;
+	long int			nbr_philosophers;
+	long int			time_to_die;
+	long int			time_to_eat;
+	long int			time_to_sleep;
+	long int			times_must_to_eat;
+	char				*wait_all_philo;
+	pthread_mutex_t		*fork_arr;
 }				t_parameters;
 
 typedef struct s_philosopher
 {
 	int						number_of_philo;
-	int						is_right_fork;
-	int						is_left_fork;
+	pthread_mutex_t			*is_right_fork;
+	pthread_mutex_t			*is_left_fork;
 	long int				last_meal;
+	long int				start_time;
 	pthread_t				thread_id;
 	t_state_philosopher		state;
 	t_parameters			*param;
