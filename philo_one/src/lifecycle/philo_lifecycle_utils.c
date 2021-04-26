@@ -39,17 +39,11 @@ void	wait_philo_sit_to_table(t_philosopher *philo)
 
 int		my_usleep(useconds_t usec)
 {
-	struct timeval	time;
-	long int		curr_time;
 	long int		start_time;
 
-	gettimeofday(&time, NULL);
-	start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	while(curr_time - start_time < usec)
+	start_time = get_current_time();
+	while(get_current_time() - start_time < usec)
 	{
-		gettimeofday(&time, NULL);
-		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		if (usleep(10) == -1)
 			return (-1);
 	}

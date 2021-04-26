@@ -12,21 +12,15 @@
 
 #include "philo_one.h"
 
-void			print_message(struct timeval time, t_philosopher *philo, char *message)
+void		print_message(t_philosopher *philo, char *message)
 {
-	long int curr_time;
-
-	gettimeofday(&time, NULL);
-	curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-	printf("I am a philo - %d | %s - %ld\n", philo->number_of_philo, message, curr_time - philo->start_time);
+	printf("I am a philo - %d | %s - %ld\n", philo->number_of_philo, message, get_current_time() - philo->start_time);
 }
 
 void			*is_philosopher_death(void *arg)
 {
 	int i;
 	t_philosopher *arr_philo;
-	struct timeval time;
-	long int curr_time;
 
 	arr_philo = arg;
 	i = 0;
@@ -40,12 +34,12 @@ void			*is_philosopher_death(void *arg)
 		i = 0;
 		while (arr_philo->param->nbr_philosophers != i)
 		{
-			gettimeofday(&time, NULL);
-			curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
-			if (curr_time - arr_philo[i].last_meal >= arr_philo->param->time_to_die && arr_philo[i].last_meal != 0)
+			if (get_current_time() - arr_philo[i].last_meal >= arr_philo->param->time_to_die && arr_philo[i].last_meal != 0)
 			{
 				arr_philo[i].state = DIED;
 				printf("Philo - %d DIED\n", arr_philo[i].number_of_philo);
+				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" ,
+					   get_current_time(), arr_philo[i].last_meal, arr_philo->param->time_to_die);
 				return (NULL);
 			}
 			i++;
@@ -57,25 +51,23 @@ void			*is_philosopher_death(void *arg)
 void			*philo_lifecycle(void *arg)
 {
 	t_philosopher	*philo;
-	struct timeval	time;
-	long int		curr_time;
+//	struct timeval	time;
 
 	philo = arg;
 	wait_philo_sit_to_table(philo);
-	gettimeofday(&time, NULL); // TODO protect may be
-	philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
-	philo->start_time = time.tv_sec * 1000 + time.tv_usec / 1000;
+	philo->last_meal = get_current_time();
+	philo->start_time = philo->last_meal;
 	while (1)
 	{
 		get_fork(philo);
-		gettimeofday(&time, NULL);
-		philo->last_meal = time.tv_sec * 1000 + time.tv_usec / 1000;
-		print_message(time, philo, "EATING");
+//		gettimeofday(&time, NULL);
+		philo->last_meal = get_current_time();//time.tv_sec * 1000 + time.tv_usec / 1000;
+		print_message(philo, "EATING");
 		my_usleep(philo->param->time_to_eat);
 		put_fork(philo);
-		print_message(time, philo, "SLEEPING");
+		print_message(philo, "SLEEPING");
 		my_usleep(philo->param->time_to_sleep);
-		print_message(time, philo, "THINKING");
+		print_message(philo, "THINKING");
 	}
 	return (NULL);
 }

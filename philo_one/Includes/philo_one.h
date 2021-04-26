@@ -64,6 +64,7 @@ t_philosopher	*init_philosophers(t_parameters *param);
 */
 long long int	ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
+long int get_current_time();
 
 
 

@@ -12,7 +12,15 @@
 
 #include "philo_one.h"
 
-void	*ft_calloc(size_t count, size_t size)
+long int	get_current_time()
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+void		*ft_calloc(size_t count, size_t size)
 {
 	void *memory;
 

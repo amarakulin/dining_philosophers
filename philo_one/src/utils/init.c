@@ -16,15 +16,11 @@ t_philosopher	*init_philosophers(t_parameters *param)
 {
 	int 			i;
 	t_philosopher	*arr_philosophers;
-	struct timeval	time;
-	long int		curr_time;
 
 	i = 0;
 	arr_philosophers = ft_calloc(param->nbr_philosophers, sizeof(t_philosopher));
 	while(i != param->nbr_philosophers)
 	{
-		gettimeofday(&time, NULL);
-		curr_time = time.tv_sec * 1000 + time.tv_usec / 1000;
 		arr_philosophers[i].number_of_philo = i;
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].param = param;
@@ -62,7 +58,5 @@ t_parameters	*get_parameters(int argc, char *argv[])
 		pthread_mutex_init(&parameters->fork_arr[i], NULL);
 		i++;
 	}
-
-
 	return (parameters);
 }
