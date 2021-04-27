@@ -70,6 +70,7 @@ void			*philo_lifecycle(void *arg)
 		print_message(philo, "has taken a fork");
 		print_message(philo, "is eating");
 		my_usleep(philo->param->time_to_eat);
+		//Philo ate
 		put_fork(philo);
 		print_message(philo, "is sleeping");
 		my_usleep(philo->param->time_to_sleep);

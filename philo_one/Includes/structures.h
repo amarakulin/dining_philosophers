@@ -19,7 +19,7 @@ typedef struct s_parameters
 	long int			time_to_die;
 	long int			time_to_eat;
 	long int			time_to_sleep;
-	long int			times_must_to_eat;
+	int					times_must_to_eat;
 	char				*wait_all_philo;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		*arr_mutex_last_meal;
