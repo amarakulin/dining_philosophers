@@ -16,7 +16,6 @@ int		wait_philo_sit_to_table(t_philosopher *philo)
 {
 	int		index_philo;
 
-	philo->state = READY;
 	index_philo = philo->index_philo;
 	philo->param->wait_all_philo[index_philo] = '1';
 	while(strlen(philo->param->wait_all_philo) != philo->param->nbr_philosophers);

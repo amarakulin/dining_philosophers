@@ -28,7 +28,6 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		arr_philosophers[i].is_left_fork = &arr_philosophers->param->fork_arr[left(
 				i, param->nbr_philosophers)];
 		printf("philo - %d | right - %d | left - %d\n", i, i, left(i, param->nbr_philosophers));
-		arr_philosophers[i].state = START_SIMULATION;
 		arr_philosophers[i].mutex_last_meal = &arr_philosophers->param->arr_mutex_last_meal[i];
 		i++;
 	}
