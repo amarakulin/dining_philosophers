@@ -22,6 +22,7 @@ t_philosopher	*init_philosophers(t_parameters *param)
 	while(i != param->nbr_philosophers)
 	{
 		arr_philosophers[i].index_philo = i;
+		arr_philosophers[i].times_ate = 0;
 		arr_philosophers[i].last_meal = 0;
 		arr_philosophers[i].param = param;
 		arr_philosophers[i].is_right_fork = &arr_philosophers->param->fork_arr[i];
@@ -58,7 +59,6 @@ t_parameters	*get_parameters(int argc, char *argv[])
 	{
 		pthread_mutex_init(&parameters->fork_arr[i], NULL);
 		pthread_mutex_init(&parameters->arr_mutex_last_meal[i], NULL);
-
 		i++;
 	}
 	pthread_mutex_init(&parameters->print_mutex, NULL);

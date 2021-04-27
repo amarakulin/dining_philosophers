@@ -15,27 +15,28 @@
 
 typedef struct s_parameters
 {
+	int					times_must_to_eat;
 	int					nbr_philosophers;
-	long int			time_to_die;
+	char				*wait_all_philo;
 	long int			time_to_eat;
 	long int			time_to_sleep;
-	int					times_must_to_eat;
-	char				*wait_all_philo;
+	long int			time_to_die;
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		*arr_mutex_last_meal;
 	pthread_mutex_t		*fork_arr;
-}				t_parameters;
+}						t_parameters;
 
 typedef struct s_philosopher
 {
-	int						index_philo;
-	pthread_mutex_t			*is_right_fork;
-	pthread_mutex_t			*is_left_fork;
-	pthread_mutex_t			*mutex_last_meal;
-	long int				last_meal;
-	pthread_t				thread_id;
-	t_parameters			*param;
-}				t_philosopher;
+	int					times_ate;
+	int					index_philo;
+	long int			last_meal;
+	pthread_t			thread_id;
+	t_parameters		*param;
+	pthread_mutex_t		*is_right_fork;
+	pthread_mutex_t		*is_left_fork;
+	pthread_mutex_t		*mutex_last_meal;
+}						t_philosopher;
 
 #endif
 
