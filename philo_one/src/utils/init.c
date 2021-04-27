@@ -27,7 +27,9 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		arr_philosophers[i].is_right_fork = &arr_philosophers->param->fork_arr[i];
 		arr_philosophers[i].is_left_fork = &arr_philosophers->param->fork_arr[left(
 				i, param->nbr_philosophers)];
+		printf("philo - %d | right - %d | left - %d\n", i, i, left(i, param->nbr_philosophers));
 		arr_philosophers[i].state = START_SIMULATION;
+		arr_philosophers[i].mutex_last_meal = &arr_philosophers->param->arr_mutex_last_meal[i];
 		i++;
 	}
 	return (arr_philosophers);
@@ -53,10 +55,14 @@ t_parameters	*get_parameters(int argc, char *argv[])
 	parameters->wait_all_philo = ft_calloc(sizeof(char), parameters->nbr_philosophers + 1);
 	memset(parameters->wait_all_philo, '0', sizeof(char) * parameters->nbr_philosophers);
 	parameters->fork_arr = ft_calloc(sizeof(pthread_mutex_t), parameters->nbr_philosophers);
+	parameters->arr_mutex_last_meal = ft_calloc(sizeof(pthread_mutex_t), parameters->nbr_philosophers);
 	while (i != parameters->nbr_philosophers)
 	{
 		pthread_mutex_init(&parameters->fork_arr[i], NULL);
+		pthread_mutex_init(&parameters->arr_mutex_last_meal[i], NULL);
+
 		i++;
 	}
+//	pthread_mutex_init(&parameters->arr_mutex_last_meal, NULL);
 	return (parameters);
 }

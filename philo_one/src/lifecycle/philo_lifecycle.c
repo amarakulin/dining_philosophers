@@ -38,7 +38,9 @@ void			*is_philosopher_death(void *arg)
 		while (arr_philo->param->nbr_philosophers != i)
 		{
 			cur_time = get_current_time();
+			pthread_mutex_lock(arr_philo[i].param->arr_mutex_last_meal);
 			last_meal = arr_philo[i].last_meal;
+			pthread_mutex_unlock(arr_philo[i].param->arr_mutex_last_meal);
 			main_condition = cur_time - last_meal >= arr_philo->param->time_to_die && last_meal != 0;
 			if (main_condition)
 			{
@@ -60,12 +62,18 @@ void			*philo_lifecycle(void *arg)
 
 	philo = arg;
 	wait_philo_sit_to_table(philo);
+	if (philo->index_philo % 2 == 0)
+		my_usleep(10);
 	philo->start_time = get_current_time();
+	pthread_mutex_lock(philo->param->arr_mutex_last_meal);
 	philo->last_meal = philo->start_time;
+	pthread_mutex_unlock(philo->param->arr_mutex_last_meal);
 	while (1)
 	{
 		get_fork(philo);
+		pthread_mutex_lock(philo->param->arr_mutex_last_meal);
 		philo->last_meal = get_current_time();//time.tv_sec * 1000 + time.tv_usec / 1000;
+		pthread_mutex_unlock(philo->param->arr_mutex_last_meal);
 		print_message(philo, "EATING");
 		my_usleep(philo->param->time_to_eat);
 		put_fork(philo);

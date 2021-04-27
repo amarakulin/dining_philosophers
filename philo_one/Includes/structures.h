@@ -27,6 +27,7 @@ typedef struct s_parameters
 	long int			time_to_sleep;
 	long int			times_must_to_eat;
 	char				*wait_all_philo;
+	pthread_mutex_t		*arr_mutex_last_meal;
 	pthread_mutex_t		*fork_arr;
 }				t_parameters;
 
@@ -35,6 +36,7 @@ typedef struct s_philosopher
 	int						index_philo;
 	pthread_mutex_t			*is_right_fork;
 	pthread_mutex_t			*is_left_fork;
+	pthread_mutex_t			*mutex_last_meal;
 	long int				last_meal;
 	long int				start_time;
 	pthread_t				thread_id;
