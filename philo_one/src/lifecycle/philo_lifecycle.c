@@ -15,7 +15,7 @@
 void		print_message(t_philosopher *philo, char *message)
 {
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("I am a philo - %d | %s - %ld\n", philo->index_philo, message, get_current_time() - philo->start_time);
+	printf("I am a philo - %d | %s - %ld\n", philo->index_philo, message, get_current_time());
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
@@ -47,9 +47,6 @@ void			*is_philosopher_death(void *arg)
 			if (main_condition)
 			{
 				printf("Philo - %d DIED | i - %d\n", arr_philo[i].index_philo, i);
-				//sometimes here just die philo if total number of philo is 4 or pair (wierd)
-				printf("curtime = %ld | last_meal = %ld | time_to_die = %ld\n" , cur_time, last_meal, arr_philo->param->time_to_die);
-				printf("result of condition - %d\n", main_condition);
 				return (NULL);
 			}
 			i++;
@@ -64,11 +61,11 @@ void			*philo_lifecycle(void *arg)
 
 	philo = arg;
 	wait_philo_sit_to_table(philo);
-	philo->start_time = get_current_time();
+//	philo->start_time = get_current_time();
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	pthread_mutex_lock(philo->param->arr_mutex_last_meal);
-	philo->last_meal = philo->start_time;
+	philo->last_meal = get_current_time();//philo->start_time;
 	pthread_mutex_unlock(philo->param->arr_mutex_last_meal);
 	while (1)
 	{
@@ -91,7 +88,7 @@ void			create_threads(t_parameters *param, t_philosopher *arr_philo)
 {
 	int				i;
 	pthread_t		thread_death;
-	pthread_t		thread_print;
+//	pthread_t		thread_print;
 
 	i = 0;
 	//TODO Create thread to print out in the terminal info
@@ -103,5 +100,5 @@ void			create_threads(t_parameters *param, t_philosopher *arr_philo)
 		i++;
 	}
 	pthread_join(thread_death, NULL);
-	pthread_join(thread_print, NULL);
+//	pthread_join(thread_print, NULL);
 }
