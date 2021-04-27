@@ -13,12 +13,6 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
-typedef enum e_state_philosopher
-{
-	START_SIMULATION = 0,
-	READY = 1,
-}			t_state_philosopher;
-
 typedef struct s_parameters
 {
 	int					nbr_philosophers;
