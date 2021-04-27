@@ -63,9 +63,9 @@ void			*philo_lifecycle(void *arg)
 	wait_philo_sit_to_table(philo);
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
-	pthread_mutex_lock(philo->param->arr_mutex_last_meal);
+	pthread_mutex_lock(philo->mutex_last_meal);
 	philo->last_meal = get_current_time();
-	pthread_mutex_unlock(philo->param->arr_mutex_last_meal);
+	pthread_mutex_unlock(philo->mutex_last_meal);
 	while (1)
 	{
 		get_fork(philo);
