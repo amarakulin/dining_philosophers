@@ -22,16 +22,16 @@ int			get_fork(t_philosopher* philo)
 	if (philo->index_philo % 2 == 0)
 	{
 		pthread_mutex_lock(philo->is_right_fork);
-		printf("Philo take right - %d\n", philo->index_philo);
+//		printf("Philo take right - %d\n", philo->index_philo);
 		pthread_mutex_lock(philo->is_left_fork);
-		printf("Philo take left - %d\n", philo->index_philo);
+//		printf("Philo take left - %d\n", philo->index_philo);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->is_left_fork);
-		printf("Philo take left - %d\n", philo->index_philo);
+//		printf("Philo take left - %d\n", philo->index_philo);
 		pthread_mutex_lock(philo->is_right_fork);
-		printf("Philo take right - %d\n", philo->index_philo);
+//		printf("Philo take right - %d\n", philo->index_philo);
 	}
 	return (0);
 }
@@ -42,18 +42,18 @@ void		put_fork(t_philosopher* philo)
 	{
 		pthread_mutex_unlock(philo->is_right_fork);
 		my_usleep(1);
-		printf("Philo put right - %d\n", philo->index_philo);
+//		printf("Philo put right - %d\n", philo->index_philo);
 		pthread_mutex_unlock(philo->is_left_fork);
-		my_usleep(1);
-		printf("Philo put left - %d\n", philo->index_philo);
+//		my_usleep(1);
+//		printf("Philo put left - %d\n", philo->index_philo);
 	}
 	else
 	{
 		pthread_mutex_unlock(philo->is_left_fork);
 		my_usleep(1);
-		printf("Philo put left - %d\n", philo->index_philo);
+//		printf("Philo put left - %d\n", philo->index_philo);
 		pthread_mutex_unlock(philo->is_right_fork);
-		my_usleep(1);
-		printf("Philo put right - %d\n", philo->index_philo);
+//		my_usleep(1);
+//		printf("Philo put right - %d\n", philo->index_philo);
 	}
 }

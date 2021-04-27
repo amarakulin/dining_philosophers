@@ -63,6 +63,6 @@ t_parameters	*get_parameters(int argc, char *argv[])
 
 		i++;
 	}
-//	pthread_mutex_init(&parameters->arr_mutex_last_meal, NULL);
+	pthread_mutex_init(&parameters->print_mutex, NULL);
 	return (parameters);
 }
