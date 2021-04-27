@@ -21,7 +21,7 @@ typedef enum e_state_philosopher
 
 typedef struct s_parameters
 {
-	long int			nbr_philosophers;
+	int					nbr_philosophers;
 	long int			time_to_die;
 	long int			time_to_eat;
 	long int			time_to_sleep;

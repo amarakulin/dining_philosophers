@@ -43,7 +43,7 @@ t_parameters	*get_parameters(int argc, char *argv[])
 	i = 0;
 	copy_argv = argv;
 	parameters = ft_calloc(sizeof(t_parameters),1);
-	parameters->nbr_philosophers = ft_atoi(copy_argv[1]);
+	parameters->nbr_philosophers = (int)ft_atoi(copy_argv[1]);
 	parameters->time_to_die = ft_atoi(copy_argv[2]);
 	parameters->time_to_eat = ft_atoi(copy_argv[3]);
 	parameters->time_to_sleep = ft_atoi(copy_argv[4]);
