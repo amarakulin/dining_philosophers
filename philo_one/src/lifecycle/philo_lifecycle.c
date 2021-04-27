@@ -63,7 +63,7 @@ void			*philo_lifecycle(void *arg)
 	pthread_mutex_unlock(philo->mutex_last_meal);
 	while (1)
 	{
-		get_fork(philo);
+		take_fork(philo);
 		pthread_mutex_lock(philo->param->arr_mutex_last_meal);
 		philo->last_meal = get_current_time();
 		pthread_mutex_unlock(philo->param->arr_mutex_last_meal);
