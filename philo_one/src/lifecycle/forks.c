@@ -41,7 +41,7 @@ void		put_fork(t_philosopher* philo)
 	if (philo->index_philo % 2 != 0)
 	{
 		pthread_mutex_unlock(philo->is_right_fork);
-		my_usleep(1);
+//		my_usleep(1);
 //		printf("Philo put right - %d\n", philo->index_philo);
 		pthread_mutex_unlock(philo->is_left_fork);
 //		my_usleep(1);
@@ -50,7 +50,7 @@ void		put_fork(t_philosopher* philo)
 	else
 	{
 		pthread_mutex_unlock(philo->is_left_fork);
-		my_usleep(1);
+//		my_usleep(1);
 //		printf("Philo put left - %d\n", philo->index_philo);
 		pthread_mutex_unlock(philo->is_right_fork);
 //		my_usleep(1);

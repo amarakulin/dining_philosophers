@@ -43,7 +43,7 @@ void			*is_philosopher_death(void *arg)
 			pthread_mutex_lock(arr_philo[i].param->arr_mutex_last_meal);
 			last_meal = arr_philo[i].last_meal;
 			pthread_mutex_unlock(arr_philo[i].param->arr_mutex_last_meal);
-			main_condition = cur_time - last_meal >= arr_philo->param->time_to_die && last_meal != 0;
+			main_condition = cur_time - last_meal > arr_philo->param->time_to_die && last_meal != 0;
 			if (main_condition)
 			{
 				printf("Philo - %d DIED | i - %d\n", arr_philo[i].index_philo, i);
