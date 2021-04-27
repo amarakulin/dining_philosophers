@@ -53,7 +53,6 @@ t_parameters	*get_parameters(int argc, char *argv[])
 	else
 		parameters->times_must_to_eat = -1;
 	parameters->wait_all_philo = ft_calloc(sizeof(char), parameters->nbr_philosophers + 1);
-	memset(parameters->wait_all_philo, '0', sizeof(char) * parameters->nbr_philosophers);
 	parameters->fork_arr = ft_calloc(sizeof(pthread_mutex_t), parameters->nbr_philosophers);
 	parameters->arr_mutex_last_meal = ft_calloc(sizeof(pthread_mutex_t), parameters->nbr_philosophers);
 	while (i != parameters->nbr_philosophers)

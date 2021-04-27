@@ -28,12 +28,7 @@ void			*is_philosopher_death(void *arg)
 	long int last_meal;
 
 	arr_philo = arg;
-	i = 0;
-	while (arr_philo->param->nbr_philosophers != i)
-	{
-		wait_philo_sit_to_table(&arr_philo[i]);
-		i++;
-	}
+	while (wait_philo_sit_to_table(&arr_philo[0]));
 	while (1)
 	{
 		i = 0;
@@ -60,7 +55,7 @@ void			*philo_lifecycle(void *arg)
 	t_philosopher	*philo;
 
 	philo = arg;
-	wait_philo_sit_to_table(philo);
+	while(wait_philo_sit_to_table(philo));
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	pthread_mutex_lock(philo->mutex_last_meal);

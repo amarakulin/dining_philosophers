@@ -12,29 +12,15 @@
 
 #include "philo_one.h"
 
-void	wait_philo_sit_to_table(t_philosopher *philo)
+int		wait_philo_sit_to_table(t_philosopher *philo)
 {
-	int		i;
-	int		count;
 	int		index_philo;
 
 	philo->state = READY;
 	index_philo = philo->index_philo;
-	while(1)
-	{
-		if (philo->state == READY)
-			philo->param->wait_all_philo[index_philo] = '1';
-		count = 0;
-		i = 0;
-		while (philo->param->wait_all_philo[i])
-		{
-			if (philo->param->wait_all_philo[i] == '1')
-				count++;
-			i++;
-		}
-		if (count == philo->param->nbr_philosophers)
-			break ;
-	}
+	philo->param->wait_all_philo[index_philo] = '1';
+	while(strlen(philo->param->wait_all_philo) != philo->param->nbr_philosophers);
+	return 0;
 }
 
 int		my_usleep(useconds_t usec)

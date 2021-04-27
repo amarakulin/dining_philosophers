@@ -38,7 +38,7 @@ void			create_threads(t_parameters *param, t_philosopher *arr_philo);
 /*
 ** philo_lifecycle_utils.c
 */
-void			wait_philo_sit_to_table(t_philosopher *philo);
+int wait_philo_sit_to_table(t_philosopher *philo);
 int				my_usleep(useconds_t usec);
 
 /*
