@@ -12,6 +12,15 @@
 
 #include "philo_one.h"
 
+void	print_error(int nbr_error, char *arg)
+{
+
+	if (nbr_error == 1)
+		printf("[-]Error : wrong number arguments\n");
+	else if (nbr_error == 2)
+		printf("[-]Error : %s - is wrong argument\n", arg);
+}
+
 int		is_digit(int c)
 {
 	if (c >= 48 && c <= 57)
@@ -38,28 +47,22 @@ int		is_number(char *arg)
 int		is_validate_parametrs(int argc, char *argv[])
 {
 	int		i;
-	long long int number_arg;
+	long int value_arg;
+	int		nbr_error;
 
 	i = 1;
+	nbr_error = 0;
 	if (argc != 5 && argc != 6)
-	{
-		printf("[-]Error : wrong number arguments\n");
-		return (0);
-	}
-	while (argv[i])
+		nbr_error = 1;
+	while (argv[i] && !nbr_error)
 	{
 		if (!is_number(argv[i]))
-		{
-			printf("[-]Error : %s - is wrong argument\n", argv[i]);
-			return (0);
-		}
-		number_arg = ft_atoi(argv[i]);
-		if ((number_arg < 1 && i == 1) || (number_arg < 0))
-		{
-			printf("[-]Error : %s - is wrong number argument\n", argv[i]);
-			return (0);
-		}
+			nbr_error = 2;
+		value_arg = ft_atoi(argv[i]);
+		if (((value_arg < 1 || value_arg > 200) && i == 1) || (value_arg < 0))
+			nbr_error = 2;
 		i++;
 	}
-	return (1);
+	print_error(nbr_error, argv[i - 1]);
+	return (nbr_error);
 }

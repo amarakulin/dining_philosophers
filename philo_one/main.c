@@ -17,7 +17,7 @@ int		main(int argc, char *argv[]){
 	t_parameters	*param;
 	t_philosopher	*arr_philo;
 
-	if (!is_validate_parametrs(argc, argv))
+	if (is_validate_parametrs(argc, argv))
 		return (1);
 	param = get_parameters(argc, argv);
 	arr_philo = init_philosophers(param);
