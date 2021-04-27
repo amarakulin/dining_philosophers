@@ -15,7 +15,7 @@
 void		print_message(t_philosopher *philo, char *message)
 {
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("I am a philo - %d | %s - %ld\n", philo->index_philo, message, get_current_time());
+	printf("I am a philo - %d | %s - %ld\n", philo->index_philo + 1, message, get_current_time());
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
