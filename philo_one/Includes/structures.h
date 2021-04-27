@@ -22,8 +22,9 @@ typedef struct s_parameters
 	long int			time_to_sleep;
 	long int			time_to_die;
 	pthread_mutex_t		print_mutex;
+	pthread_mutex_t		*arr_fork;
+	pthread_mutex_t		*arr_times_to_eat;
 	pthread_mutex_t		*arr_mutex_last_meal;
-	pthread_mutex_t		*fork_arr;
 }						t_parameters;
 
 typedef struct s_philosopher
@@ -36,6 +37,7 @@ typedef struct s_philosopher
 	pthread_mutex_t		*is_right_fork;
 	pthread_mutex_t		*is_left_fork;
 	pthread_mutex_t		*mutex_last_meal;
+	pthread_mutex_t		*mutex_times_ate;
 }						t_philosopher;
 
 #endif
