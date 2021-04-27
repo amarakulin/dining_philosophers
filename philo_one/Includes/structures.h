@@ -39,7 +39,6 @@ typedef struct s_philosopher
 	pthread_mutex_t			*is_left_fork;
 	pthread_mutex_t			*mutex_last_meal;
 	long int				last_meal;
-	long int				start_time;
 	pthread_t				thread_id;
 	t_state_philosopher		state;
 	t_parameters			*param;
