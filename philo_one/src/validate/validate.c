@@ -12,33 +12,32 @@
 
 #include "philo_one.h"
 
-const char	*error_msg[2] = {"wrong number arguments",
-							"- is wrong argument"};
+const char	*g_error_msg[2] = {"wrong number arguments",
+								 "- is wrong argument"};
 
 void	print_error(int nbr_error, char *arg)
 {
-
 	if (nbr_error == 0)
-		printf("[-]Error : %s\n", error_msg[nbr_error]);
+		printf("[-]Error : %s\n", g_error_msg[nbr_error]);
 	else if (nbr_error == 1)
-		printf("[-]Error : %s %s\n", arg, error_msg[nbr_error]);
+		printf("[-]Error : %s %s\n", arg, g_error_msg[nbr_error]);
 }
 
-int		is_digit(int c)
+int	is_digit(int c)
 {
 	if (c >= 48 && c <= 57)
 		return (1);
 	return (0);
 }
 
-int		is_number(char *arg)
+int	is_number(char *arg)
 {
 	int		i;
 	char	*p_arg;
 
 	i = 0;
 	p_arg = arg;
-	while(p_arg[i])
+	while (p_arg[i])
 	{
 		if (!is_digit(p_arg[i]))
 			return (0);
@@ -47,11 +46,11 @@ int		is_number(char *arg)
 	return (1);
 }
 
-int		is_validate_parametrs(int argc, char *argv[])
+int	is_validate_parametrs(int argc, char *argv[])
 {
-	int		i;
-	long int value_arg;
-	int		nbr_error;
+	int			i;
+	long int	value_arg;
+	int			nbr_error;
 
 	i = 1;
 	nbr_error = -1;
