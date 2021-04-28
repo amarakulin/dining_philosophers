@@ -20,11 +20,8 @@ const char *philo_msg[5] = {"has taken a fork",
 
 void		print_philo_message(t_philosopher *philo, t_action_philo action)
 {
-	int		number_of_philo;
-
-	number_of_philo = philo->index_philo + 1;
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("%ld %d %s\n", get_current_time(), number_of_philo, philo_msg[action]);
+	printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, philo_msg[action]);
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
@@ -35,7 +32,7 @@ void		print_times_ate(t_philosopher *arr_philo)
 	i = 0;
 	while (arr_philo->param->nbr_philosophers != i)
 	{
-		printf("Philo - %d ATE %d times \n", arr_philo[i].index_philo, arr_philo[i].times_ate);
+		printf("Philo - %d ATE %d times \n", arr_philo[i].index_philo + 1, arr_philo[i].times_ate);
 		i++;
 	}
 }
