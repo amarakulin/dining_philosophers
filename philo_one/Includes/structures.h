@@ -33,7 +33,7 @@ typedef struct s_parameters
 	pthread_mutex_t		print_mutex;
 	pthread_mutex_t		*arr_fork;
 	pthread_mutex_t		*arr_times_to_eat;
-	pthread_mutex_t		*arr_mutex_last_meal;
+	pthread_mutex_t		*arr_last_meal;
 }						t_parameters;
 
 typedef struct s_philosopher
