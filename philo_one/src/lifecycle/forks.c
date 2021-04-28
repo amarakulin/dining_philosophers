@@ -35,7 +35,7 @@ int			take_fork(t_philosopher* philo)
 	return (0);
 }
 
-void		put_fork(t_philosopher* philo)
+int			put_fork(t_philosopher* philo)
 {
 	if (philo->index_philo % 2 != 0)
 	{
@@ -47,7 +47,10 @@ void		put_fork(t_philosopher* philo)
 		pthread_mutex_unlock(philo->is_left_fork);
 		pthread_mutex_unlock(philo->is_right_fork);
 	}
-//	pthread_mutex_lock(philo->mutex_times_ate);
-//	philo->times_ate++;
-//	pthread_mutex_unlock(philo->mutex_times_ate);
+	pthread_mutex_lock(philo->mutex_times_ate);
+	philo->times_ate++;
+	pthread_mutex_unlock(philo->mutex_times_ate);
+	if (philo->times_ate == philo->param->times_must_to_eat)
+		return (0);
+	return (1);
 }

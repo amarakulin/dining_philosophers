@@ -45,7 +45,7 @@ int				my_usleep(useconds_t usec);
 ** fork.c
 */
 int			take_fork(t_philosopher* philo);
-void		put_fork(t_philosopher* philo);
+int put_fork(t_philosopher* philo);
 int			left(int position_philo, int total_philosophers);
 
 /*

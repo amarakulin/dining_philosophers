@@ -104,17 +104,12 @@ void			*philo_lifecycle(void *arg)
 		print_philo_message(philo, TAKEN_FORK);
 		print_philo_message(philo, EATING);
 		my_usleep(philo->param->time_to_eat);
-		put_fork(philo);
-		pthread_mutex_lock(philo->mutex_times_ate);
-		philo->times_ate++;
-		pthread_mutex_unlock(philo->mutex_times_ate);
-		if (philo->times_ate == philo->param->times_must_to_eat)
-			return NULL;
+		if (!put_fork(philo))
+			return (NULL);
 		print_philo_message(philo, SLEEPING);
 		my_usleep(philo->param->time_to_sleep);
 		print_philo_message(philo, THINKING);
 	}
-	return (NULL);
 }
 
 void			create_threads(t_parameters *param, t_philosopher *arr_philo)
@@ -123,7 +118,6 @@ void			create_threads(t_parameters *param, t_philosopher *arr_philo)
 	pthread_t		thread_death;
 
 	i = 0;
-	//TODO Create thread to print out in the terminal info
 	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)arr_philo);
 	while (i != param->nbr_philosophers)
 	{
