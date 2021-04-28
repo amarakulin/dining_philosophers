@@ -25,9 +25,6 @@
 //structures.h
 #import "structures.h"
 
-
-
-
 /*
 ** philo_lifecycle.c
 */
@@ -46,14 +43,14 @@ void			print_times_ate(t_philosopher *arr_philo);
 /*
 ** fork.c
 */
-int			take_fork(t_philosopher* philo);
-int			put_fork(t_philosopher* philo);
-int			left(int position_philo, int total_philosophers);
+int				take_fork(t_philosopher* philo);
+int				put_fork(t_philosopher* philo);
+int				left(int position_philo, int total_philosophers);
 
 /*
 ** fork.c
 */
-void		*is_philosopher_death(void *arg);
+void			*is_philosopher_death(void *arg);
 
 
 /*
@@ -72,7 +69,7 @@ t_philosopher	*init_philosophers(t_parameters *param);
 */
 long long int	ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
-long int get_current_time();
+long int		get_current_time();
 
 
 
