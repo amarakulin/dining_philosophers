@@ -94,17 +94,10 @@ void			*philo_lifecycle(void *arg)
 	while (1)
 	{
 		take_fork(philo);
-		pthread_mutex_lock(philo->mutex_last_meal);
-		philo->last_meal = get_current_time();
-		pthread_mutex_unlock(philo->mutex_last_meal);
 		print_message(philo, "has taken a fork");
 		print_message(philo, "is eating");
 		my_usleep(philo->param->time_to_eat);
 		put_fork(philo);
-		//Philo ate
-		pthread_mutex_lock(philo->mutex_times_ate);
-		philo->times_ate++;
-		pthread_mutex_unlock(philo->mutex_times_ate);
 		print_message(philo, "is sleeping");
 		my_usleep(philo->param->time_to_sleep);
 		print_message(philo, "is thinking");

@@ -29,6 +29,9 @@ int			take_fork(t_philosopher* philo)
 		pthread_mutex_lock(philo->is_left_fork);
 		pthread_mutex_lock(philo->is_right_fork);
 	}
+	pthread_mutex_lock(philo->mutex_last_meal);
+	philo->last_meal = get_current_time();
+	pthread_mutex_unlock(philo->mutex_last_meal);
 	return (0);
 }
 
@@ -44,4 +47,7 @@ void		put_fork(t_philosopher* philo)
 		pthread_mutex_unlock(philo->is_left_fork);
 		pthread_mutex_unlock(philo->is_right_fork);
 	}
+	pthread_mutex_lock(philo->mutex_times_ate);
+	philo->times_ate++;
+	pthread_mutex_unlock(philo->mutex_times_ate);
 }
