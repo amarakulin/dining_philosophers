@@ -20,8 +20,11 @@ const char *philo_msg[5] = {"has taken a fork",
 
 void		print_philo_message(t_philosopher *philo, t_action_philo action)
 {
+	int		number_of_philo;
+
+	number_of_philo = philo->index_philo + 1;
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("I am a philo - %d | %ld - %s\n", philo->index_philo + 1, get_current_time(), philo_msg[action]);
+	printf("%ld %d %s\n", get_current_time(), number_of_philo, philo_msg[action]);
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
