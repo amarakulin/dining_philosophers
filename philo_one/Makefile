@@ -23,7 +23,7 @@ INCLUDE = ./Includes
 SRC_PATHS = ./src \
 			./src/lifecycle \
 			./src/utils \
-			./src/parser
+			./src/validate
 
 vpath %.c $(SRC_PATHS)
 vpath %.o $(OBJDIR)
