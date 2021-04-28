@@ -19,6 +19,7 @@ typedef enum e_action_philo
 	EATING,
 	SLEEPING,
 	THINKING,
+	DIED,
 }				t_action_philo;
 
 typedef struct s_parameters

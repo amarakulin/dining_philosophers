@@ -38,15 +38,23 @@ void			create_threads(t_parameters *param, t_philosopher *arr_philo);
 /*
 ** philo_lifecycle_utils.c
 */
-int wait_philo_sit_to_table(t_philosopher *philo);
+int				wait_philo_sit_to_table(t_philosopher *philo);
 int				my_usleep(useconds_t usec);
+void			print_philo_message(t_philosopher *philo, t_action_philo action);
+void			print_times_ate(t_philosopher *arr_philo);
 
 /*
 ** fork.c
 */
 int			take_fork(t_philosopher* philo);
-int put_fork(t_philosopher* philo);
+int			put_fork(t_philosopher* philo);
 int			left(int position_philo, int total_philosophers);
+
+/*
+** fork.c
+*/
+void		*is_philosopher_death(void *arg);
+
 
 /*
 ** validate.c
