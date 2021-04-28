@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
-#define STRUCTURES_H
+# define STRUCTURES_H
 
 typedef enum e_action_philo
 {
@@ -66,4 +66,3 @@ typedef struct s_lifecycle
 }				t_lifecycle;
 
 #endif
-

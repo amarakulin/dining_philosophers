@@ -10,20 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef _PHILO_ONE_H
-#define _PHILO_ONE_H
+#ifndef PHILO_ONE_H
+# define PHILO_ONE_H
 
 //General headers
-#import <unistd.h>
-#import <stdio.h>
-#import <stdlib.h>
-#import <string.h>
-#include <pthread.h>
-#include <sys/time.h>
+# include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <pthread.h>
+# include <sys/time.h>
 
 //structures.h
-#import "structures.h"
+# include "structures.h"
 
 /*
 ** philo_lifecycle.c
@@ -35,24 +34,24 @@ void			create_threads(t_self *self);
 /*
 ** philo_lifecycle_utils.c
 */
-int				wait_philo_sit_to_table(t_philosopher *philo, t_parameters *param);
+int				wait_philo_sit_to_table(t_philosopher *philo, \
+				t_parameters *param);
 int				my_usleep(useconds_t usec);
-void			print_philo_message(t_philosopher *philo, t_mutex *mutex,
-						t_action_philo action);
+void			print_philo_message(t_philosopher *philo, t_mutex *mutex, \
+				t_action_philo action);
 void			print_times_ate(t_philosopher *arr_philo, t_parameters *param);
 
 /*
 ** fork.c
 */
-int				take_fork(t_philosopher* philo);
+int				take_fork(t_philosopher *philo);
 int				put_fork(t_philosopher *philo, int times_must_to_eat);
 int				left(int position_philo, int total_philosophers);
 
 /*
-** fork.c
+** death.c
 */
 void			*is_philosopher_death(void *arg);
-
 
 /*
 ** validate.c
@@ -71,8 +70,7 @@ t_mutex			*init_mutex(t_parameters *param);
 */
 long long int	ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
-long int		get_current_time();
+long int		get_current_time(void);
 void			clear_all_malloc(t_self *self);
-
 
 #endif
