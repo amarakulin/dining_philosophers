@@ -13,6 +13,14 @@
 #ifndef STRUCTURES_H
 #define STRUCTURES_H
 
+typedef enum e_action_philo
+{
+	TAKEN_FORK,
+	EATING,
+	SLEEPING,
+	THINKING,
+}				t_action_philo;
+
 typedef struct s_parameters
 {
 	int					times_must_to_eat;

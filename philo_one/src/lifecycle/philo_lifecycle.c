@@ -12,10 +12,15 @@
 
 #include "philo_one.h"
 
-void		print_message(t_philosopher *philo, char *message)
+const char *philo_msg[4] = {"has taken a fork",
+							"is eating",
+							"is sleeping",
+							"is thinking"};
+
+void		print_philo_message(t_philosopher *philo, t_action_philo action)
 {
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("I am a philo - %d | %s - %ld\n", philo->index_philo + 1, message, get_current_time());
+	printf("I am a philo - %d | %s - %ld\n", philo->index_philo + 1, philo_msg[action], get_current_time());
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
@@ -94,13 +99,13 @@ void			*philo_lifecycle(void *arg)
 	while (1)
 	{
 		take_fork(philo);
-		print_message(philo, "has taken a fork");
-		print_message(philo, "is eating");
+		print_philo_message(philo, TAKEN_FORK);
+		print_philo_message(philo, EATING);
 		my_usleep(philo->param->time_to_eat);
 		put_fork(philo);
-		print_message(philo, "is sleeping");
+		print_philo_message(philo, SLEEPING);
 		my_usleep(philo->param->time_to_sleep);
-		print_message(philo, "is thinking");
+		print_philo_message(philo, THINKING);
 	}
 	return (NULL);
 }
