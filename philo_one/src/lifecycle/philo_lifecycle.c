@@ -14,10 +14,16 @@
 
 void	*philo_lifecycle(void *arg)
 {
+	t_lifecycle		*lifecycle_struct;
+	t_self			*self;
 	t_philosopher	*philo;
+	int				index_philo;
 
-	philo = arg;
-	while(wait_philo_sit_to_table(philo));
+	lifecycle_struct = arg;
+	self = lifecycle_struct->self;
+	index_philo = lifecycle_struct->index_philo;
+	philo = &self->arr_philo[index_philo];
+	while(wait_philo_sit_to_table(philo, self->param));
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	pthread_mutex_lock(philo->mutex_last_meal);
@@ -26,27 +32,42 @@ void	*philo_lifecycle(void *arg)
 	while (1)
 	{
 		take_fork(philo);
-		print_philo_message(philo, TAKEN_FORK);
-		print_philo_message(philo, EATING);
-		my_usleep(philo->param->time_to_eat);
-		if (!put_fork(philo))
+		print_philo_message(philo, self->mutex, TAKEN_FORK);
+		print_philo_message(philo, self->mutex, EATING);
+		my_usleep(self->param->time_to_eat);
+		if (!put_fork(philo, self->param->times_must_to_eat))
+		{
+			free(arg);
 			return (NULL);
-		print_philo_message(philo, SLEEPING);
-		my_usleep(philo->param->time_to_sleep);
-		print_philo_message(philo, THINKING);
+		}
+		print_philo_message(philo, self->mutex, SLEEPING);
+		my_usleep(self->param->time_to_sleep);
+		print_philo_message(philo, self->mutex, THINKING);
 	}
 }
 
-void	create_threads(t_parameters *param, t_philosopher *arr_philo)
+t_lifecycle		*constract_lifecycle(t_self *self, int i)
+{
+	t_lifecycle *lifecycle;
+	lifecycle = ft_calloc(1, sizeof(t_lifecycle));
+	lifecycle->self = self;
+	lifecycle->index_philo = i;
+	return (lifecycle);
+}
+
+void	create_threads(t_self *self)
 {
 	int			i;
 	pthread_t	thread_death;
+	t_philosopher	*arr_philo;
 
 	i = 0;
-	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)arr_philo);
-	while (i != param->nbr_philosophers)
+	arr_philo = self->arr_philo;
+	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)self);
+	while (i != self->param->nbr_philosophers)
 	{
-		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)&arr_philo[i]);
+		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, (void *)constract_lifecycle(
+				self, i));
 		i++;
 	}
 	pthread_join(thread_death, NULL);
