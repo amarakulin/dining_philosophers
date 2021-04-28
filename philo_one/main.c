@@ -22,6 +22,7 @@ int		main(int argc, char *argv[]){
 	param = get_parameters(argc, argv);
 	arr_philo = init_philosophers(param);
 	create_threads(param, arr_philo);
+	printf("End of simulation\n");
 	free(param->wait_all_philo);
 	free(param->arr_fork);
 	free(param);
