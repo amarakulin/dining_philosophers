@@ -20,26 +20,26 @@ const char *philo_msg[4] = {"has taken a fork",
 void		print_philo_message(t_philosopher *philo, t_action_philo action)
 {
 	pthread_mutex_lock(&philo->param->print_mutex);
-	printf("I am a philo - %d | %s - %ld\n", philo->index_philo + 1, philo_msg[action], get_current_time());
+	printf("I am a philo - %d | %ld - %s\n", philo->index_philo + 1, get_current_time(), philo_msg[action]);
 	pthread_mutex_unlock(&philo->param->print_mutex);
 }
 
-int			minimal_ate_times(t_philosopher *arr_philo)
+int		all_philo_done_eat(t_philosopher *arr_philo)
 {
 	int		i;
-	int		min;
+	int		count;
 
 	i = 0;
-	min = arr_philo->param->times_must_to_eat;
+	count = 0;
 	while (arr_philo->param->nbr_philosophers != i)
 	{
 		pthread_mutex_lock(arr_philo[i].mutex_times_ate);
-		if (min > arr_philo[i].times_ate)
-			min = arr_philo[i].times_ate;
+		if (arr_philo[i].times_ate == arr_philo->param->times_must_to_eat)
+			count++;
 		pthread_mutex_unlock(arr_philo[i].mutex_times_ate);
 		i++;
 	}
-	return (min);
+	return (count == arr_philo->param->nbr_philosophers);
 }
 
 void			*is_philosopher_death(void *arg)
@@ -47,6 +47,7 @@ void			*is_philosopher_death(void *arg)
 	int i;
 	t_philosopher *arr_philo;
 	int main_condition;
+	int is_done_eat;
 	long int cur_time;
 	long int last_meal;
 
@@ -61,19 +62,20 @@ void			*is_philosopher_death(void *arg)
 			pthread_mutex_lock(arr_philo[i].mutex_last_meal);
 			last_meal = arr_philo[i].last_meal;
 			pthread_mutex_unlock(arr_philo[i].mutex_last_meal);
-
+			pthread_mutex_lock(arr_philo[i].mutex_times_ate);
+			is_done_eat = arr_philo[i].times_ate == arr_philo->param->times_must_to_eat;
+			pthread_mutex_unlock(arr_philo[i].mutex_times_ate);
 			main_condition = cur_time - last_meal > arr_philo->param->time_to_die && last_meal != 0;
-			if (main_condition)
+			if (main_condition && !is_done_eat)
 			{
 				printf("Philo - %d DIED | i - %d\n", arr_philo[i].index_philo, i);
 				return (NULL);
 			}
 			i++;
 		}
-		if (arr_philo->param->times_must_to_eat != -1 && minimal_ate_times(arr_philo) >= arr_philo->param->times_must_to_eat)
+		if (all_philo_done_eat(arr_philo))
 		{
 			i = 0;
-
 			while (arr_philo->param->nbr_philosophers != i)
 			{
 				printf("Philo - %d ATE %d times \n", arr_philo[i].index_philo, arr_philo[i].times_ate);
@@ -103,6 +105,11 @@ void			*philo_lifecycle(void *arg)
 		print_philo_message(philo, EATING);
 		my_usleep(philo->param->time_to_eat);
 		put_fork(philo);
+		pthread_mutex_lock(philo->mutex_times_ate);
+		philo->times_ate++;
+		pthread_mutex_unlock(philo->mutex_times_ate);
+		if (philo->times_ate == philo->param->times_must_to_eat)
+			return NULL;
 		print_philo_message(philo, SLEEPING);
 		my_usleep(philo->param->time_to_sleep);
 		print_philo_message(philo, THINKING);
