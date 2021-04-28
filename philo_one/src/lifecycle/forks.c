@@ -12,12 +12,12 @@
 
 #include "philo_one.h"
 
-int			left(int position_philo, int total_philosophers)
+int	left(int position_philo, int total_philosophers)
 {
 	return ((position_philo + 1) % total_philosophers);
 }
 
-int			take_fork(t_philosopher* philo)
+int	take_fork(t_philosopher *philo)
 {
 	if (philo->index_philo % 2 == 0)
 	{
@@ -35,7 +35,7 @@ int			take_fork(t_philosopher* philo)
 	return (0);
 }
 
-int		put_fork(t_philosopher *philo, int times_must_to_eat)
+int	put_fork(t_philosopher *philo, int times_must_to_eat)
 {
 	if (philo->index_philo % 2 != 0)
 	{
