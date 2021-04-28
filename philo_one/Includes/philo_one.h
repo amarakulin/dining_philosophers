@@ -72,7 +72,7 @@ t_mutex			*init_mutex(t_parameters *param);
 long long int	ft_atoi(const char *str);
 void			*ft_calloc(size_t count, size_t size);
 long int		get_current_time();
-
+void			clear_all_malloc(t_self *self);
 
 
 #endif

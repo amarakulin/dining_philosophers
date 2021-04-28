@@ -12,9 +12,9 @@
 
 #include "philo_one.h"
 
-int		main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_self			*self;
+	t_self	*self;
 
 	if (is_validate_parametrs(argc, argv) != -1)
 		return (1);
@@ -24,13 +24,6 @@ int		main(int argc, char *argv[])
 	self->arr_philo = init_philosophers(self->param, self->mutex);
 	create_threads(self);
 	printf("End of simulation\n");
-	free(self->param->wait_all_philo);
-	free(self->param);
-	free(self->arr_philo);
-	free(self->mutex->arr_fork);
-	free(self->mutex->arr_last_meal);
-	free(self->mutex->arr_times_to_eat);
-	free(self->mutex);
-	free(self);
+	clear_all_malloc(self);
 	return (0);
 }
