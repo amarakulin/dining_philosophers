@@ -28,7 +28,6 @@ t_philosopher	*init_philosophers(t_parameters *param)
 		arr_philosophers[i].is_right_fork = &arr_philosophers->param->arr_fork[i];
 		arr_philosophers[i].is_left_fork = &arr_philosophers->param->arr_fork[left(
 				i, param->nbr_philosophers)];
-		printf("philo - %d | right - %d | left - %d\n", i, i, left(i, param->nbr_philosophers));
 		arr_philosophers[i].mutex_last_meal = &arr_philosophers->param->arr_mutex_last_meal[i];
 		arr_philosophers[i].mutex_times_ate = &arr_philosophers->param->arr_times_to_eat[i];
 		i++;
@@ -65,6 +64,5 @@ t_parameters	*get_parameters(int argc, char *argv[])
 		i++;
 	}
 	pthread_mutex_init(&param->print_mutex, NULL);
-	printf("TIMES MUST EAT - %d\n", param->times_must_to_eat);
 	return (param);
 }

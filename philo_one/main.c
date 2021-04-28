@@ -21,9 +21,7 @@ int		main(int argc, char *argv[]){
 		return (1);
 	param = get_parameters(argc, argv);
 	arr_philo = init_philosophers(param);
-	printf("Before Threads\n");
 	create_threads(param, arr_philo);
-	printf("After Threads\n");
 	free(param->wait_all_philo);
 	free(param->arr_fork);
 	free(param);
