@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosothers_one
+NAME = philo_one
 CC = gcc
 P_THREAD = -pthread
 C_FILES = $(shell find . -name "*.c" $(IGNORE_PATHS) -execdir echo {} ';')
