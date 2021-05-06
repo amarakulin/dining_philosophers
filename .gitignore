@@ -5,9 +5,9 @@
 **/src/obj/*.o
 
 ### Binar files ###
-**/philosothers_one
-**/philosothers_two
-**/philosothers_three
+**/philo_one
+**/philo_two
+**/philo_three
 
 
 
