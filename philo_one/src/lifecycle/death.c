@@ -74,6 +74,7 @@ void	*is_philosopher_death(void *arg)
 		{
 			print_philo_message(&arr_philo[index_died_philo], \
 			self->mutex, DIED);
+			pthread_mutex_lock(&self->mutex->print_mutex);
 			return (NULL);
 		}
 		if (is_all_philo_done_eat(arr_philo, self->param))

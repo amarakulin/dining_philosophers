@@ -76,6 +76,7 @@ void	*is_philosopher_death(void *arg)
 		{
 			print_philo_message(&arr_philo[index_died_philo], \
 			self->semaphore, DIED);
+			sem_wait(self->semaphore->print_sem);
 			return (NULL);
 		}
 		if (is_all_philo_done_eat(arr_philo, self->param, self->semaphore))
