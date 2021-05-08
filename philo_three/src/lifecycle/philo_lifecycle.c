@@ -13,34 +13,25 @@
 #include "philo_three.h"
 
 int	action_philo(t_philosopher *philo, t_parameters *param, \
-	t_semaphore *semaphore, void *arg)
+	t_semaphore *semaphore)
 {
 	take_fork(philo, semaphore);
 	print_philo_message(philo, semaphore, TAKEN_FORK);
 	print_philo_message(philo, semaphore, EATING);
 	my_usleep(param->time_to_eat);
 	if (!put_fork(philo, semaphore, param->times_must_to_eat))
-	{
-		free(arg);
 		return (0);
-	}
 	print_philo_message(philo, semaphore, SLEEPING);
 	my_usleep(param->time_to_sleep);
 	print_philo_message(philo, semaphore, THINKING);
 	return (1);
 }
 
-void	*philo_lifecycle(void *arg)
+void	*philo_lifecycle(t_self *self, int i)
 {
-	t_lifecycle		*lifecycle_struct;
-	t_self			*self;
 	t_philosopher	*philo;
-	int				index_philo;
 
-	lifecycle_struct = arg;
-	self = lifecycle_struct->self;
-	index_philo = lifecycle_struct->index_philo;
-	philo = &self->arr_philo[index_philo];
+	philo = &self->arr_philo[i];
 	while (wait_philo_sit_to_table(philo, self->param))
 		;
 	if (philo->index_philo % 2 == 0)
@@ -50,7 +41,7 @@ void	*philo_lifecycle(void *arg)
 	sem_post(self->semaphore->sem_last_meal);
 	while (1)
 	{
-		if (!action_philo(philo, self->param, self->semaphore, arg))
+		if (!action_philo(philo, self->param, self->semaphore))
 			return (NULL);
 	}
 }
@@ -65,20 +56,41 @@ t_lifecycle	*constract_lifecycle(t_self *self, int i)
 	return (lifecycle);
 }
 
-void	create_threads(t_self *self)
+void	philo_process(t_self *self, int i)
+{
+	pthread_t		thread_death;
+
+	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)self);
+	philo_lifecycle(self, i);
+	pthread_join(thread_death, NULL);
+}
+
+void	create_process(t_self *self)
 {
 	int				i;
+	int				result_process;
 	pthread_t		thread_death;
 	t_philosopher	*arr_philo;
 
 	i = 0;
 	arr_philo = self->arr_philo;
-	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)self);
-	while (i != self->param->nbr_philosophers)
+	while(i != self->param->nbr_philosophers)
 	{
-		pthread_create(&arr_philo[i].thread_id, NULL, philo_lifecycle, \
-		(void *)constract_lifecycle(self, i));
+		result_process = fork();
+		if (result_process < 0)
+		{
+			printf("Error fork\n");
+			exit(1);
+		}
+		else if (result_process == 0)
+		{
+			philo_process(self, i);
+		}
+		else
+		{
+
+			//parent
+		}
 		i++;
 	}
-	pthread_join(thread_death, NULL);
 }

@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 	self->param = get_parameters(argc, argv);
 	self->semaphore = init_semaphore(self->param);
 	self->arr_philo = init_philosophers(self->param, self->semaphore);
-	create_threads(self);
+	create_process(self);
 	clear_all_data(self);
 	printf("End of simulation\n");
 	return (0);

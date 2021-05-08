@@ -29,8 +29,8 @@
 ** philo_lifecycle.c
 */
 void			*is_philosopher_death(void *arg);
-void			*philo_lifecycle(void *arg);
-void			create_threads(t_self *self);
+void			*philo_lifecycle(t_self *self, int i);
+void			create_process(t_self *self);
 
 /*
 ** philo_lifecycle_utils.c
