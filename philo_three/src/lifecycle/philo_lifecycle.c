@@ -32,8 +32,8 @@ void	*philo_lifecycle(t_self *self, int i)
 	t_philosopher	*philo;
 
 	philo = &self->arr_philo[i];
-	while (wait_philo_sit_to_table(philo, self->param))
-		;
+//	while (wait_philo_sit_to_table(philo, self->param))
+//		;
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	sem_wait(self->semaphore->sem_last_meal);
@@ -42,55 +42,69 @@ void	*philo_lifecycle(t_self *self, int i)
 	while (1)
 	{
 		if (!action_philo(philo, self->param, self->semaphore))
-			return (NULL);
+			exit (1);
 	}
 }
 
-t_lifecycle	*constract_lifecycle(t_self *self, int i)
+t_death_thread 	*constract_death_thread(t_self *self, int i)
 {
-	t_lifecycle	*lifecycle;
+	t_death_thread	*death_thread;
 
-	lifecycle = ft_calloc(1, sizeof(t_lifecycle));
-	lifecycle->self = self;
-	lifecycle->index_philo = i;
-	return (lifecycle);
+	death_thread = ft_calloc(1, sizeof(t_death_thread));
+	death_thread->self = self;
+	death_thread->index_philo = i;
+	return (death_thread);
 }
 
 void	philo_process(t_self *self, int i)
 {
 	pthread_t		thread_death;
 
-	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)self);
+	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)constract_death_thread(self, i));
 	philo_lifecycle(self, i);
 	pthread_join(thread_death, NULL);
+}
+
+void	*parent_process(int nbr_philosophers, int *pids)
+{
+	int	status;
+	int	i;
+	int	res;
+
+	i = 0;
+	res = waitpid(0, &status, WUNTRACED);
+	if (status == 48)
+		return (NULL);
+	else if (status == 256)
+		kill(res, SIGKILL);
+	else if (status == 0)
+	{
+		while(nbr_philosophers != i)
+			kill(pids[i++], SIGKILL);
+		return (NULL);
+	}
+	return (parent_process(nbr_philosophers, pids));
 }
 
 void	create_process(t_self *self)
 {
 	int				i;
-	int				result_process;
-	pthread_t		thread_death;
-	t_philosopher	*arr_philo;
+	int				*pids;
 
 	i = 0;
-	arr_philo = self->arr_philo;
+	pids = ft_calloc(self->param->nbr_philosophers, sizeof(int));
 	while(i != self->param->nbr_philosophers)
 	{
-		result_process = fork();
-		if (result_process < 0)
+		pids[i] = fork();
+		if (pids[i] < 0)
 		{
 			printf("Error fork\n");
 			exit(1);
 		}
-		else if (result_process == 0)
-		{
+		else if (pids[i] == 0)
 			philo_process(self, i);
-		}
-		else
-		{
-
-			//parent
-		}
 		i++;
 	}
+	parent_process(self->param->nbr_philosophers, pids);
+	free(pids);
 }

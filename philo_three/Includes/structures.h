@@ -55,10 +55,10 @@ typedef struct s_self
 	t_semaphore		*semaphore;
 }				t_self;
 
-typedef struct s_lifecycle
+typedef struct s_death_thread
 {
 	t_self		*self;
 	int			index_philo;
-}				t_lifecycle;
+}				t_death_thread;
 
 #endif

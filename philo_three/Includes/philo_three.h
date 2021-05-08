@@ -21,6 +21,7 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <semaphore.h>
+# include <signal.h>
 
 //structures.h
 # include "structures.h"
