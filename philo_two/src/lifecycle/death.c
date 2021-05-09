@@ -73,7 +73,7 @@ void	*is_philosopher_death(void *arg)
 							self->semaphore);
 		if (index_died_philo != -1)
 		{
-			print_philo_message(&arr_philo[index_died_philo], \
+			print_philo_message(&arr_philo[index_died_philo], self->param, \
 			self->semaphore, DIED);
 			return (NULL);
 		}
