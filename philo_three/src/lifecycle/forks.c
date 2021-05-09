@@ -1,4 +1,4 @@
-		/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   forks.c                                            :+:      :+:    :+:   */
@@ -27,7 +27,8 @@ int	take_fork(t_philosopher *philo, t_semaphore *semaphore)
 	return (0);
 }
 
-int	put_fork(t_philosopher *philo, t_semaphore *semaphore, int times_must_to_eat)
+int	put_fork(t_philosopher *philo, t_semaphore *semaphore, \
+			int times_must_to_eat)
 {
 	sem_post(semaphore->sem_fork);
 	sem_post(semaphore->sem_fork);

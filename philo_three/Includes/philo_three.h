@@ -39,14 +39,14 @@ void			create_process(t_self *self);
 int				my_usleep(useconds_t usec);
 void			print_philo_message(t_philosopher *philo, t_semaphore *semaphore, \
 				t_action_philo action);
-void			print_times_ate(t_philosopher *arr_philo, t_parameters *param);
+t_death_thread	*constract_death_thread(t_self *self, int i);
 
 /*
 ** fork.c
 */
-int take_fork(t_philosopher *philo, t_semaphore *semaphore);
-int
-put_fork(t_philosopher *philo, t_semaphore *semaphore, int times_must_to_eat);
+int				take_fork(t_philosopher *philo, t_semaphore *semaphore);
+int				put_fork(t_philosopher *philo, t_semaphore *semaphore, \
+			int times_must_to_eat);
 int				left(int position_philo, int total_philosophers);
 
 /*

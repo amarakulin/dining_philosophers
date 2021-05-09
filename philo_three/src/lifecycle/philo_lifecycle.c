@@ -32,8 +32,6 @@ void	*philo_lifecycle(t_self *self, int i)
 	t_philosopher	*philo;
 
 	philo = &self->arr_philo[i];
-//	while (wait_philo_sit_to_table(philo, self->param))
-//		;
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	sem_wait(self->semaphore->sem_last_meal);
@@ -46,30 +44,21 @@ void	*philo_lifecycle(t_self *self, int i)
 	}
 }
 
-t_death_thread 	*constract_death_thread(t_self *self, int i)
-{
-	t_death_thread	*death_thread;
-
-	death_thread = ft_calloc(1, sizeof(t_death_thread));
-	death_thread->self = self;
-	death_thread->index_philo = i;
-	return (death_thread);
-}
-
 void	philo_process(t_self *self, int i)
 {
 	pthread_t		thread_death;
 
-	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)constract_death_thread(self, i));
+	pthread_create(&thread_death, NULL, is_philosopher_death, \
+				(void *)constract_death_thread(self, i));
 	philo_lifecycle(self, i);
 	pthread_join(thread_death, NULL);
 }
 
 void	*parent_process(int nbr_philosophers, int *pids)
 {
-	int	status;
-	int	i;
-	int	res;
+	int		status;
+	int		i;
+	int		res;
 
 	i = 0;
 	res = waitpid(0, &status, WUNTRACED);
@@ -79,7 +68,7 @@ void	*parent_process(int nbr_philosophers, int *pids)
 		kill(res, SIGKILL);
 	else if (status == 0)
 	{
-		while(nbr_philosophers != i)
+		while (nbr_philosophers != i)
 			kill(pids[i++], SIGKILL);
 		return (NULL);
 	}
@@ -88,12 +77,12 @@ void	*parent_process(int nbr_philosophers, int *pids)
 
 void	create_process(t_self *self)
 {
-	int				i;
-	int				*pids;
+	int	i;
+	int	*pids;
 
 	i = 0;
 	pids = ft_calloc(self->param->nbr_philosophers, sizeof(int));
-	while(i != self->param->nbr_philosophers)
+	while (i != self->param->nbr_philosophers)
 	{
 		pids[i] = fork();
 		if (pids[i] < 0)

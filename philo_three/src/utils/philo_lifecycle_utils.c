@@ -50,3 +50,13 @@ int	my_usleep(useconds_t usec)
 		usleep(usec);
 	return (0);
 }
+
+t_death_thread 	*constract_death_thread(t_self *self, int i)
+{
+	t_death_thread	*death_thread;
+
+	death_thread = ft_calloc(1, sizeof(t_death_thread));
+	death_thread->self = self;
+	death_thread->index_philo = i;
+	return (death_thread);
+}

@@ -12,7 +12,7 @@
 
 #include "philo_three.h"
 
-int is_philo_died(t_philosopher *philo, t_parameters *param,
+int	is_philo_died(t_philosopher *philo, t_parameters *param,
 				t_semaphore *semaphore)
 {
 	int			is_time_to_die;
