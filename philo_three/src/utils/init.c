@@ -31,7 +31,7 @@ t_semaphore	*init_semaphore(t_parameters *param)
 	return (semaphore);
 }
 
-t_philosopher	*init_philosophers(t_parameters *param, t_semaphore *mutex)
+t_philosopher	*init_philosophers(t_parameters *param)
 {
 	int				i;
 	t_philosopher	*arr_philosophers;

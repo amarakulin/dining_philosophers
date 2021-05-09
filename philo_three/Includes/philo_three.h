@@ -63,7 +63,7 @@ int				is_validate_parametrs(int argc, char *argv[]);
 ** init.c
 */
 t_parameters	*get_parameters(int argc, char *argv[]);
-t_philosopher	*init_philosophers(t_parameters *param, t_semaphore *mutex);
+t_philosopher	*init_philosophers(t_parameters *param);
 t_semaphore		*init_semaphore(t_parameters *param);
 
 /*
