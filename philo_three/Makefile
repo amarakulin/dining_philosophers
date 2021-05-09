@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 NAME = philo_three
-CC = gcc
+CC = gcc -Wall -Werror -Wextra
 P_THREAD = -lpthread
 C_FILES = $(shell find . -name "*.c" $(IGNORE_PATHS) -execdir echo {} ';')
 OBJ = $(C_FILES:%.c=%.o)
