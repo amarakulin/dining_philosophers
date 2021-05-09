@@ -12,7 +12,7 @@
 
 #include "philo_two.h"
 
-int is_philo_died(t_philosopher *arr_philo, t_parameters *param,
+int	is_philo_died(t_philosopher *arr_philo, t_parameters *param,
 				t_semaphore *semaphore)
 {
 	int			i;
@@ -40,7 +40,7 @@ int is_philo_died(t_philosopher *arr_philo, t_parameters *param,
 	return (-1);
 }
 
-int is_all_philo_done_eat(t_philosopher *arr_philo, t_parameters *param,
+int	is_all_philo_done_eat(t_philosopher *arr_philo, t_parameters *param,
 						t_semaphore *semaphore)
 {
 	int	i;
@@ -69,7 +69,8 @@ void	*is_philosopher_death(void *arg)
 	arr_philo = self->arr_philo;
 	while (1)
 	{
-		index_died_philo = is_philo_died(arr_philo, self->param, self->semaphore);
+		index_died_philo = is_philo_died(arr_philo, self->param, \
+							self->semaphore);
 		if (index_died_philo != -1)
 		{
 			print_philo_message(&arr_philo[index_died_philo], \
