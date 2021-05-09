@@ -50,7 +50,6 @@ void	*is_philosopher_death(void *arg)
 		if (index_died_philo != -1)
 		{
 			print_philo_message(philo, self->semaphore, DIED);
-			sem_wait(self->semaphore->print_sem);
 			exit (0);
 		}
 	}

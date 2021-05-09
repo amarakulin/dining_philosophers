@@ -21,10 +21,19 @@ const char	*g_philo_msg[5] = {"has taken a fork",
 void	print_philo_message(t_philosopher *philo, t_mutex *mutex, \
 		t_action_philo action)
 {
-	pthread_mutex_lock(&mutex->print_mutex);
-	printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
-	g_philo_msg[action]);
-	pthread_mutex_unlock(&mutex->print_mutex);
+	if (action == DIED)
+	{
+		pthread_mutex_lock(&mutex->print_mutex);
+		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		g_philo_msg[action]);
+	}
+	else
+	{
+		pthread_mutex_lock(&mutex->print_mutex);
+		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		g_philo_msg[action]);
+		pthread_mutex_unlock(&mutex->print_mutex);
+	}
 }
 
 void	print_times_ate(t_philosopher *arr_philo, t_parameters *param)

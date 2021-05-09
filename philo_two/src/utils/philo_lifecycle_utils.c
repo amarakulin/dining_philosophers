@@ -21,10 +21,19 @@ const char	*g_philo_msg[5] = {"has taken a fork",
 void	print_philo_message(t_philosopher *philo, t_semaphore *semaphore, \
 		t_action_philo action)
 {
-	sem_wait(semaphore->print_sem);
-	printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
-	g_philo_msg[action]);
-	sem_post(semaphore->print_sem);
+	if (action == DIED)
+	{
+		sem_wait(semaphore->print_sem);
+		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		g_philo_msg[action]);
+	}
+	else
+	{
+		sem_wait(semaphore->print_sem);
+		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		g_philo_msg[action]);
+		sem_post(semaphore->print_sem);
+	}
 }
 
 void	print_times_ate(t_philosopher *arr_philo, t_parameters *param)
