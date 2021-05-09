@@ -37,8 +37,8 @@ void			create_process(t_self *self);
 ** philo_lifecycle_utils.c
 */
 int				my_usleep(useconds_t usec);
-void			print_philo_message(t_philosopher *philo, t_semaphore *semaphore, \
-				t_action_philo action);
+void			print_philo_message(t_philosopher *philo, \
+		t_parameters *param, t_semaphore *semaphore, t_action_philo action);
 t_death_thread	*constract_death_thread(t_self *self, int i);
 
 /*

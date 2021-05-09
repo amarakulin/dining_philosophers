@@ -35,6 +35,7 @@ typedef struct s_parameters
 	int					nbr_philosophers;
 	char				*wait_all_philo;
 	int					times_must_to_eat;
+	long int			time_start;
 	long int			time_to_eat;
 	long int			time_to_sleep;
 	long int			time_to_die;

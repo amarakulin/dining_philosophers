@@ -16,14 +16,14 @@ int	action_philo(t_philosopher *philo, t_parameters *param, \
 	t_semaphore *semaphore)
 {
 	take_fork(philo, semaphore);
-	print_philo_message(philo, semaphore, TAKEN_FORK);
-	print_philo_message(philo, semaphore, EATING);
+	print_philo_message(philo, param, semaphore, TAKEN_FORK);
+	print_philo_message(philo, param, semaphore, EATING);
 	my_usleep(param->time_to_eat);
 	if (!put_fork(philo, semaphore, param->times_must_to_eat))
 		return (0);
-	print_philo_message(philo, semaphore, SLEEPING);
+	print_philo_message(philo, param, semaphore, SLEEPING);
 	my_usleep(param->time_to_sleep);
-	print_philo_message(philo, semaphore, THINKING);
+	print_philo_message(philo, param, semaphore, THINKING);
 	return (1);
 }
 
@@ -82,6 +82,7 @@ void	create_process(t_self *self)
 
 	i = 0;
 	pids = ft_calloc(self->param->nbr_philosophers, sizeof(int));
+	self->param->time_start = get_current_time();
 	while (i != self->param->nbr_philosophers)
 	{
 		pids[i] = fork();
