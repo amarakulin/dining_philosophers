@@ -16,17 +16,17 @@ int	action_philo(t_philosopher *philo, t_parameters *param, \
 	t_mutex *mutex, void *arg)
 {
 	take_fork(philo);
-	print_philo_message(philo, mutex, TAKEN_FORK);
-	print_philo_message(philo, mutex, EATING);
+	print_philo_message(philo, param, mutex, TAKEN_FORK);
+	print_philo_message(philo, param, mutex, EATING);
 	my_usleep(param->time_to_eat);
 	if (!put_fork(philo, param->times_must_to_eat))
 	{
 		free(arg);
 		return (0);
 	}
-	print_philo_message(philo, mutex, SLEEPING);
+	print_philo_message(philo, param, mutex, SLEEPING);
 	my_usleep(param->time_to_sleep);
-	print_philo_message(philo, mutex, THINKING);
+	print_philo_message(philo, param, mutex, THINKING);
 	return (1);
 }
 
@@ -71,6 +71,7 @@ void	create_threads(t_self *self)
 
 	i = 0;
 	arr_philo = self->arr_philo;
+	self->param->start_time = get_current_time();
 	pthread_create(&thread_death, NULL, is_philosopher_death, (void *)self);
 	while (i != self->param->nbr_philosophers)
 	{

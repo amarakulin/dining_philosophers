@@ -70,7 +70,7 @@ void	*is_philosopher_death(void *arg)
 		index_died_philo = is_philo_died(arr_philo, self->param);
 		if (index_died_philo != -1)
 		{
-			print_philo_message(&arr_philo[index_died_philo], \
+			print_philo_message(&arr_philo[index_died_philo], self->param, \
 			self->mutex, DIED);
 			return (NULL);
 		}

@@ -35,8 +35,8 @@ void			create_threads(t_self *self);
 ** philo_lifecycle_utils.c
 */
 int				my_usleep(useconds_t usec);
-void			print_philo_message(t_philosopher *philo, t_mutex *mutex, \
-				t_action_philo action);
+void			print_philo_message(t_philosopher *philo, t_parameters *param, \
+				t_mutex *mutex, t_action_philo action);
 void			print_times_ate(t_philosopher *arr_philo, t_parameters *param);
 
 /*

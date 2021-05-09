@@ -18,19 +18,19 @@ const char	*g_philo_msg[5] = {"has taken a fork",
 							  "is thinking",
 							  "died"};
 
-void	print_philo_message(t_philosopher *philo, t_mutex *mutex, \
+void	print_philo_message(t_philosopher *philo, t_parameters *param, t_mutex *mutex, \
 		t_action_philo action)
 {
 	if (action == DIED)
 	{
 		pthread_mutex_lock(&mutex->print_mutex);
-		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		printf("%ld %d %s\n", get_current_time() - param->start_time, philo->index_philo + 1, \
 		g_philo_msg[action]);
 	}
 	else
 	{
 		pthread_mutex_lock(&mutex->print_mutex);
-		printf("%ld %d %s\n", get_current_time(), philo->index_philo + 1, \
+		printf("%ld %d %s\n", get_current_time() - param->start_time, philo->index_philo + 1, \
 		g_philo_msg[action]);
 		pthread_mutex_unlock(&mutex->print_mutex);
 	}
