@@ -36,19 +36,6 @@ void	print_philo_message(t_philosopher *philo, t_semaphore *semaphore, \
 	}
 }
 
-void	print_times_ate(t_philosopher *arr_philo, t_parameters *param)
-{
-	int	i;
-
-	i = 0;
-	while (param->nbr_philosophers != i)
-	{
-		printf("Philo - %d ATE %d times \n", arr_philo[i].index_philo + 1, \
-		arr_philo[i].times_ate);
-		i++;
-	}
-}
-
 int	my_usleep(useconds_t usec)
 {
 	long int	start_time;

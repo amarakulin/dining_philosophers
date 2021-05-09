@@ -75,9 +75,6 @@ void	*is_philosopher_death(void *arg)
 			return (NULL);
 		}
 		if (is_all_philo_done_eat(arr_philo, self->param))
-		{
-			print_times_ate(arr_philo, self->param);
 			return (NULL);
-		}
 	}
 }
