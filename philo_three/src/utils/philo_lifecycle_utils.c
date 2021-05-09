@@ -56,10 +56,12 @@ int	my_usleep(useconds_t usec)
 	long int	start_time;
 
 	start_time = get_current_time();
-	while (get_current_time() - start_time < usec)
+	while (get_current_time() - start_time < usec && usec < 100)
 	{
 		if (usleep(100) == -1)
 			return (-1);
 	}
+	if (usec < 100)
+		usleep(usec);
 	return (0);
 }
