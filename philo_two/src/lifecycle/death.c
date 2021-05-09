@@ -67,8 +67,6 @@ void	*is_philosopher_death(void *arg)
 
 	self = arg;
 	arr_philo = self->arr_philo;
-	while (wait_philo_sit_to_table(arr_philo, self->param))
-		;
 	while (1)
 	{
 		index_died_philo = is_philo_died(arr_philo, self->param, self->semaphore);

@@ -41,8 +41,6 @@ void	*philo_lifecycle(void *arg)
 	self = lifecycle_struct->self;
 	index_philo = lifecycle_struct->index_philo;
 	philo = &self->arr_philo[index_philo];
-	while (wait_philo_sit_to_table(philo, self->param))
-		;
 	if (philo->index_philo % 2 == 0)
 		my_usleep(10);
 	sem_wait(self->semaphore->sem_last_meal);

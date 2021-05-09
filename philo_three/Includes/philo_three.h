@@ -36,8 +36,6 @@ void			create_process(t_self *self);
 /*
 ** philo_lifecycle_utils.c
 */
-int				wait_philo_sit_to_table(t_philosopher *philo, \
-				t_parameters *param);
 int				my_usleep(useconds_t usec);
 void			print_philo_message(t_philosopher *philo, t_semaphore *semaphore, \
 				t_action_philo action);

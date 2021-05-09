@@ -49,17 +49,6 @@ void	print_times_ate(t_philosopher *arr_philo, t_parameters *param)
 	}
 }
 
-int	wait_philo_sit_to_table(t_philosopher *philo, t_parameters *param)
-{
-	int	index_philo;
-
-	index_philo = philo->index_philo;
-	param->wait_all_philo[index_philo] = '1';
-	while (strlen(param->wait_all_philo) != param->nbr_philosophers)
-		;
-	return (0);
-}
-
 int	my_usleep(useconds_t usec)
 {
 	long int	start_time;
