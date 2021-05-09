@@ -79,4 +79,10 @@ void	create_threads(t_self *self)
 		i++;
 	}
 	pthread_join(thread_death, NULL);
+	i = 0;
+	while (i != self->param->nbr_philosophers)
+	{
+		pthread_detach(&arr_philo->thread_id[i]);
+		i++;
+	}
 }
